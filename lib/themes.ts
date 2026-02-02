@@ -1,0 +1,42 @@
+export const themes = {
+    dark: {
+        bg: 'linear-gradient(180deg, #0a0a0f 0%, #0f0f18 50%, #141420 100%)',
+        bgSolid: '#0a0a0f',
+        bgCard: 'linear-gradient(145deg, #16161f 0%, #1c1c28 100%)',
+        bgCardHover: 'linear-gradient(145deg, #1a1a26 0%, #22222f 100%)',
+        bgDropdown: 'linear-gradient(145deg, #12121a 0%, #1a1a28 100%)',
+        bgInput: 'rgba(255,255,255,0.03)',
+        bgPill: 'rgba(255,255,255,0.03)',
+        border: 'rgba(255,255,255,0.05)',
+        borderHover: 'rgba(255,107,53,0.15)',
+        text: '#ffffff',
+        textSecondary: '#9ca3af',
+        textMuted: '#6b7280',
+        textPlaceholder: '#4b5563',
+        headerBg: 'rgba(10,10,15,0.98)',
+        overlayBg: 'rgba(0,0,0,0.85)',
+        particleOpacity: 0.2,
+        orbOpacity: 0.2,
+    },
+    light: {
+        bg: 'linear-gradient(180deg, #f8f9fc 0%, #f0f2f7 50%, #e8ebf2 100%)',
+        bgSolid: '#f8f9fc',
+        bgCard: 'linear-gradient(145deg, #ffffff 0%, #f8f9fc 100%)',
+        bgCardHover: 'linear-gradient(145deg, #ffffff 0%, #fff5f0 100%)',
+        bgDropdown: 'linear-gradient(145deg, #ffffff 0%, #f8f9fc 100%)',
+        bgInput: 'rgba(0,0,0,0.03)',
+        bgPill: 'rgba(0,0,0,0.03)',
+        border: 'rgba(0,0,0,0.08)',
+        borderHover: 'rgba(255,107,53,0.25)',
+        text: '#1a1a2e',
+        textSecondary: '#4b5563',
+        textMuted: '#6b7280',
+        textPlaceholder: '#9ca3af',
+        headerBg: 'rgba(248,249,252,0.98)',
+        overlayBg: 'rgba(255,255,255,0.9)',
+        particleOpacity: 0.3,
+        orbOpacity: 0.15,
+    }
+};
+
+export type ThemeType = 'dark' | 'light';

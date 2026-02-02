@@ -1,0 +1,23 @@
+export const countries = [
+    { code: 'AG', name: 'Antigua and Barbuda', flag: '🇦🇬' },
+    { code: 'BS', name: 'The Bahamas', flag: '🇧🇸' },
+    { code: 'BB', name: 'Barbados', flag: '🇧🇧' },
+    { code: 'BZ', name: 'Belize', flag: '🇧🇿' },
+    { code: 'DM', name: 'Dominica', flag: '🇩🇲' },
+    { code: 'GD', name: 'Grenada', flag: '🇬🇩' },
+    { code: 'GY', name: 'Guyana', flag: '🇬🇾' },
+    { code: 'HT', name: 'Haiti', flag: '🇭🇹' },
+    { code: 'JM', name: 'Jamaica', flag: '🇯🇲' },
+    { code: 'MS', name: 'Montserrat', flag: '🇲🇸' },
+    { code: 'KN', name: 'St. Kitts and Nevis', flag: '🇰🇳' },
+    { code: 'LC', name: 'St. Lucia', flag: '🇱🇨' },
+    { code: 'VC', name: 'St. Vincent and the Grenadines', flag: '🇻🇨' },
+    { code: 'SR', name: 'Suriname', flag: '🇸🇷' },
+    { code: 'TT', name: 'Trinidad and Tobago', flag: '🇹🇹' },
+    // Associate Members
+    { code: 'AI', name: 'Anguilla', flag: '🇦🇮', associate: true },
+    { code: 'BM', name: 'Bermuda', flag: '🇧🇲', associate: true },
+    { code: 'VG', name: 'British Virgin Islands', flag: '🇻🇬', associate: true },
+    { code: 'KY', name: 'Cayman Islands', flag: '🇰🇾', associate: true },
+    { code: 'TC', name: 'Turks and Caicos Islands', flag: '🇹🇨', associate: true },
+];
