@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Search, Mic, Menu, Filter, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, Mic, Menu, ArrowRight } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { NavigationMenu } from '@/components/NavigationMenu';
 import { FloatingParticles } from '@/components/FloatingParticles';
@@ -11,9 +11,8 @@ import { BusinessCard } from '@/components/BusinessCard';
 import { ChatPopup } from '@/components/ChatPopup';
 
 import { themes, ThemeType } from '@/lib/themes';
-import { countries } from '@/data/countries';
-import { sampleBusinesses } from '@/data/businesses';
 import { industries } from '@/data/industries';
+import { supabase } from '@/utils/supabase/client';
 
 export default function CBConnectApp() {
   const [theme, setTheme] = useState<ThemeType>('dark');
@@ -25,13 +24,44 @@ export default function CBConnectApp() {
   const [chatType, setChatType] = useState<'voice' | 'text' | null>(null);
   const [selectedBusiness, setSelectedBusiness] = useState<any>(null);
 
+  // Data State
+  const [countries, setCountries] = useState<any[]>([]);
+  const [businesses, setBusinesses] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const t = themes[theme];
 
+  // Fetch Data from Supabase
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+
+      // Fetch Countries
+      const { data: countriesData } = await supabase
+        .from('countries')
+        .select('*')
+        .order('name');
+
+      if (countriesData) setCountries(countriesData);
+
+      // Fetch Businesses
+      const { data: businessesData } = await supabase
+        .from('businesses')
+        .select('*');
+
+      if (businessesData) setBusinesses(businessesData);
+
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
   // Filter businesses
-  const filteredBusinesses = sampleBusinesses.filter((b) => {
-    const matchesCountry = selectedCountry ? b.country === selectedCountry.code : true;
+  const filteredBusinesses = businesses.filter((b) => {
+    const matchesCountry = selectedCountry ? b.country_code === selectedCountry.code : true;
     const matchesSearch = b.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      b.description.toLowerCase().includes(searchQuery.toLowerCase());
+      (b.description && b.description.toLowerCase().includes(searchQuery.toLowerCase()));
     const matchesIndustry = selectedIndustry === 'all' || b.industry === selectedIndustry;
     return matchesCountry && matchesSearch && matchesIndustry;
   });
@@ -45,6 +75,14 @@ export default function CBConnectApp() {
     setSelectedBusiness(business);
     setChatType('text');
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center transition-colors duration-300" style={{ background: t.bg }}>
+        <CBConnectLogo animated size="large" />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -111,7 +149,7 @@ export default function CBConnectApp() {
       <main className="pt-24 pb-20 px-4 max-w-2xl mx-auto min-h-screen flex flex-col relative z-10">
         {!selectedCountry ? (
           // Country Selection View
-          <div className="flex-1 flex flex-coljustify-center animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="flex-1 flex flex-col justify-center animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="text-center mb-10 mt-10">
               <div className="inline-flex items-center justify-center p-3 mb-6 rounded-3xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20">
                 <CBConnectLogo size="large" animated />
@@ -134,6 +172,7 @@ export default function CBConnectApp() {
                 isOpen={isCountryDropdownOpen}
                 setIsOpen={setIsCountryDropdownOpen}
                 theme={theme}
+                countries={countries}
               />
 
               <div className="text-center text-xs mt-8" style={{ color: t.textMuted }}>
