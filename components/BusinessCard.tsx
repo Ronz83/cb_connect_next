@@ -6,6 +6,8 @@ import { industries } from '@/data/industries';
 import { countries } from '@/data/countries';
 import { themes } from '@/lib/themes';
 
+import Link from 'next/link';
+
 interface BusinessCardProps {
     business: any;
     onVoiceChat: (business: any) => void;
@@ -46,12 +48,14 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business, onVoiceCha
             {/* Header with logo and name */}
             <div className="flex items-start gap-4 mb-3 relative z-10">
                 <div className="relative">
-                    <img
-                        src={business.logo}
-                        alt={business.name}
-                        className="w-16 h-16 rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
-                        style={{ boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}
-                    />
+                    <Link href={`/business/${business.id}`}>
+                        <img
+                            src={business.logo}
+                            alt={business.name}
+                            className="w-16 h-16 rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
+                            style={{ boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}
+                        />
+                    </Link>
                     {/* Online indicator */}
                     <div
                         className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center"
@@ -61,12 +65,14 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business, onVoiceCha
                     </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                    <h3
-                        className="font-medium text-lg leading-tight mb-1 group-hover:text-orange-500 transition-colors"
-                        style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif", color: t.text }}
-                    >
-                        {business.name}
-                    </h3>
+                    <Link href={`/business/${business.id}`}>
+                        <h3
+                            className="font-medium text-lg leading-tight mb-1 group-hover:text-orange-500 transition-colors hover:underline"
+                            style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif", color: t.text }}
+                        >
+                            {business.name}
+                        </h3>
+                    </Link>
                     <div className="flex items-center gap-2 text-sm" style={{ color: t.textSecondary }}>
                         <IndustryIcon className="w-4 h-4 text-orange-400" />
                         <span>{industries.find(i => i.id === business.industry)?.name}</span>

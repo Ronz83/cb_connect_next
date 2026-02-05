@@ -4,32 +4,44 @@ import React from 'react';
 import { themes } from '@/lib/themes'; // We will create this
 
 export const FloatingParticles = ({ theme }: { theme: 'dark' | 'light' }) => {
-    // Fallback if themes not loaded yet, or handle import differently
-    // Since themes acts as a constant, maybe we pass 't' or use a hook.
-    // For now, let's replicate the theme data or imports.
-    // Actually, I should extract 'themes' to a constant file first to avoid circular deps or prop drilling issues.
-    // I will create `lib/themes.ts` later. For now, assuming it exists.
+    const [particles, setParticles] = React.useState<Array<{
+        width: string;
+        height: string;
+        left: string;
+        top: string;
+        animationDuration: string;
+        animationDelay: string;
+    }>>([]);
 
-    // NOTE: Modified to accept the theme object properties directly or re-import
-    // But wait, the component just needs `particleOpacity`.
+    React.useEffect(() => {
+        const newParticles = [...Array(20)].map(() => ({
+            width: Math.random() * 4 + 2 + 'px',
+            height: Math.random() * 4 + 2 + 'px',
+            left: Math.random() * 100 + '%',
+            top: Math.random() * 100 + '%',
+            animationDuration: 10 + Math.random() * 20 + 's',
+            animationDelay: `-${Math.random() * 20}s`,
+        }));
+        setParticles(newParticles);
+    }, []);
 
-    const particleOpacity = theme === 'dark' ? 0.2 : 0.3; // Hardcoded from original constants for now to simplify
+    const particleOpacity = theme === 'dark' ? 0.2 : 0.3;
 
     return (
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(20)].map((_, i) => (
+            {particles.map((p, i) => (
                 <div
                     key={i}
                     className="absolute rounded-full"
                     style={{
-                        width: Math.random() * 4 + 2 + 'px',
-                        height: Math.random() * 4 + 2 + 'px',
+                        width: p.width,
+                        height: p.height,
                         background: `linear-gradient(135deg, #FF6B35, #FF8C42)`,
-                        left: Math.random() * 100 + '%',
-                        top: Math.random() * 100 + '%',
+                        left: p.left,
+                        top: p.top,
                         opacity: particleOpacity,
-                        animation: `float ${10 + Math.random() * 20}s ease-in-out infinite`,
-                        animationDelay: `-${Math.random() * 20}s`,
+                        animation: `float ${p.animationDuration} ease-in-out infinite`,
+                        animationDelay: p.animationDelay,
                     }}
                 />
             ))}

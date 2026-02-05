@@ -1,0 +1,12 @@
+{
+    "mcpServers": {
+        "prod-ghl-mcp": {
+            "url": "https://services.leadconnectorhq.com/mcp/",
+            "type": "sse",
+            "headers": {
+                "Authorization": "Bearer pit-161e2e52-a248-45e1-8493-ab3c6977d2ec",
+                "locationId": "PiPGhGQUHooNH7p8no1p"
+            }
+        }
+    }
+}

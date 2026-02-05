@@ -1,296 +1,208 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { Search, Mic, Menu, ArrowRight } from 'lucide-react';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { NavigationMenu } from '@/components/NavigationMenu';
-import { FloatingParticles } from '@/components/FloatingParticles';
+import React from 'react';
+import Link from 'next/link';
+import { ChevronRight, ArrowRight, CheckCircle2, Star, Zap, LayoutDashboard, ShieldCheck, PlayCircle, Briefcase, Car, Phone, Home, MapPin, CheckCircle, Globe, BarChart3 } from 'lucide-react';
 import { CBConnectLogo } from '@/components/CBConnectLogo';
-import { CountryDropdown } from '@/components/CountryDropdown';
-import { BusinessCard } from '@/components/BusinessCard';
-import { ChatPopup } from '@/components/ChatPopup';
+import { AuthButton } from '@/components/auth/AuthButton';
+import { ThemeHeroSearch } from '@/components/themes/MyListing/ThemeHeroSearch';
+import { ThemeListingCard } from '@/components/themes/MyListing/ThemeListingCard';
 
-import { themes, ThemeType } from '@/lib/themes';
-import { industries } from '@/data/industries';
-import { supabase } from '@/utils/supabase/client';
-
-export default function CBConnectApp() {
-  const [theme, setTheme] = useState<ThemeType>('dark');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState<any>(null);
-  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedIndustry, setSelectedIndustry] = useState('all');
-  const [chatType, setChatType] = useState<'voice' | 'text' | null>(null);
-  const [selectedBusiness, setSelectedBusiness] = useState<any>(null);
-
-  // Data State
-  const [countries, setCountries] = useState<any[]>([]);
-  const [businesses, setBusinesses] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const t = themes[theme];
-
-  // Fetch Data from Supabase
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-
-      // Fetch Countries
-      const { data: countriesData } = await supabase
-        .from('countries')
-        .select('*')
-        .order('name');
-
-      if (countriesData) setCountries(countriesData);
-
-      // Fetch Businesses
-      const { data: businessesData } = await supabase
-        .from('businesses')
-        .select('*');
-
-      if (businessesData) setBusinesses(businessesData);
-
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
-  // Filter businesses
-  const filteredBusinesses = businesses.filter((b) => {
-    const matchesCountry = selectedCountry ? b.country_code === selectedCountry.code : true;
-    const matchesSearch = b.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (b.description && b.description.toLowerCase().includes(searchQuery.toLowerCase()));
-    const matchesIndustry = selectedIndustry === 'all' || b.industry === selectedIndustry;
-    return matchesCountry && matchesSearch && matchesIndustry;
-  });
-
-  const handleVoiceChat = (business: any) => {
-    setSelectedBusiness(business);
-    setChatType('voice');
-  };
-
-  const handleTextChat = (business: any) => {
-    setSelectedBusiness(business);
-    setChatType('text');
-  };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center transition-colors duration-300" style={{ background: t.bg }}>
-        <CBConnectLogo animated size="large" />
-      </div>
-    );
-  }
-
+export default function LandingPage() {
   return (
-    <div
-      className="min-h-screen relative font-sans transition-colors duration-300"
-      style={{ background: t.bg }}
-    >
-      <FloatingParticles theme={theme} />
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-orange-500/30">
 
-      {/* Navigation Menu */}
-      <NavigationMenu
-        isOpen={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
-        onNavigateHome={() => {
-          setSelectedCountry(null);
-          setIsMenuOpen(false);
-        }}
-        theme={theme}
-      />
-
-      {/* Chat Popup */}
-      <ChatPopup
-        isOpen={!!chatType}
-        onClose={() => setChatType(null)}
-        type={chatType}
-        business={selectedBusiness}
-        theme={theme}
-      />
-
-      {/* Header */}
-      <header
-        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b transition-colors duration-300"
-        style={{
-          background: t.headerBg,
-          borderColor: t.border
-        }}
-      >
-        <div className="max-w-2xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div
-            className="flex items-center gap-3 cursor-pointer"
-            onClick={() => setSelectedCountry(null)}
-          >
+      {/* Navbar */}
+      <nav className="fixed top-0 w-full z-50 bg-[#050505]/80 backdrop-blur-xl border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-2">
             <CBConnectLogo size="small" animated />
-            <span className="font-bold text-lg tracking-tight" style={{ color: t.text }}>
-              CBConnect
-            </span>
+            <span className="font-bold text-lg tracking-tight">CB Connect</span>
           </div>
-          <div className="flex items-center gap-3">
-            <ThemeToggle theme={theme} setTheme={setTheme} />
-            <button
-              onClick={() => setIsMenuOpen(true)}
-              className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95"
-              style={{
-                background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)',
-                border: `1px solid ${theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
-              }}
-            >
-              <Menu className="w-5 h-5" style={{ color: t.text }} />
-            </button>
+
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+            <Link href="#features" className="hover:text-white transition-colors">Features</Link>
+            <Link href="#pricing" className="hover:text-white transition-colors">Pricing</Link>
+            <Link href="/search" className="hover:text-white transition-colors">Directory</Link>
+            <Link href="/about" className="hover:text-white transition-colors">About</Link>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <Link href="/login" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Log in</Link>
+            <Link href="/signup" className="hidden sm:flex bg-orange-600 hover:bg-orange-500 text-white px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-orange-600/20">
+              Start Free
+            </Link>
           </div>
         </div>
-      </header>
+      </nav>
 
-      {/* Main Content */}
-      <main className="pt-24 pb-20 px-4 max-w-2xl mx-auto min-h-screen flex flex-col relative z-10">
-        {!selectedCountry ? (
-          // Country Selection View
-          <div className="flex-1 flex flex-col justify-center animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="text-center mb-10 mt-10">
-              <div className="inline-flex items-center justify-center p-3 mb-6 rounded-3xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20">
-                <CBConnectLogo size="large" animated />
-              </div>
-              <h1 className="text-4xl font-bold mb-4 tracking-tight" style={{ color: t.text }}>
-                Connect to the <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
-                  Caribbean
-                </span>
-              </h1>
-              <p className="text-lg max-w-xs mx-auto leading-relaxed" style={{ color: t.textSecondary }}>
-                Access AI-powered services across the entire CARICOM region.
-              </p>
+      {/* Hero Section */}
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden bg-[#050505]">
+        {/* Background Gradients */}
+        <div className="absolute inset-0 bg-[#050505]">
+          <div className="absolute top-0 -left-10 w-[600px] h-[600px] bg-orange-600/10 rounded-full blur-[128px]" />
+          <div className="absolute bottom-0 -right-10 w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[128px]" />
+          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+        </div>
+
+        <div className="relative z-10 max-w-5xl mx-auto space-y-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 animate-fade-in-up backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-sm font-medium text-gray-300">Live in 15+ Caribbean Countries</span>
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 animate-fade-in-up delay-100 leading-tight">
+            Discover the <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Caribbean</span> <br /> Like Never Before.
+          </h1>
+
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-10 animate-fade-in-up delay-200">
+            Find top-rated businesses, properties, cars, and jobs across the islands. <br /> The directory built for growth.
+          </p>
+
+          <div className="animate-fade-in-up delay-300">
+            <ThemeHeroSearch />
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Listings Grid */}
+      <section id="features" className="py-24 bg-[#0A0A0A] border-y border-[#1F1F1F]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <h2 className="text-3xl font-bold mb-2">Featured Listings</h2>
+              <p className="text-gray-400">Hand-picked highlights from the directory.</p>
+            </div>
+            <Link href="/search" className="text-orange-500 font-medium hover:text-orange-400 flex items-center gap-2">
+              View All <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Mock Data for Theme Integration Preview */}
+            <ThemeListingCard
+              listing={{
+                id: 1,
+                title: "Ocean View Villa",
+                image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2942&auto=format&fit=crop",
+                logo: "https://placehold.co/100x100/orange/white?text=RE",
+                category: { name: "Real Estate", icon: <Home size={14} />, color: "#10b981" },
+                location: "Montego Bay, Jamaica",
+                rating: 4.9,
+                reviewCount: 24,
+                verified: true,
+                status: "Open",
+                price: "$2.5M",
+                infoFields: [
+                  { icon: <Briefcase size={14} />, label: "Luxury Estate" },
+                  { icon: <MapPin size={14} />, label: "Beachfront" }
+                ]
+              }}
+            />
+            <ThemeListingCard
+              listing={{
+                id: 2,
+                title: "Elite Car Rentals",
+                image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2940&auto=format&fit=crop",
+                logo: "https://placehold.co/100x100/blue/white?text=CR",
+                category: { name: "Automotive", icon: <Car size={14} />, color: "#3b82f6" },
+                location: "Nassau, Bahamas",
+                rating: 4.8,
+                reviewCount: 156,
+                verified: true,
+                status: "Open",
+                infoFields: [
+                  { icon: <Phone size={14} />, label: "+1 (242) 555-0192" },
+                  { icon: <Globe size={14} />, label: "elitecars.demo" }
+                ]
+              }}
+            />
+            <ThemeListingCard
+              listing={{
+                id: 3,
+                title: "Senior Developer",
+                image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2940&auto=format&fit=crop",
+                logo: "https://placehold.co/100x100/purple/white?text=TC",
+                category: { name: "Jobs", icon: <Briefcase size={14} />, color: "#d946ef" },
+                location: "Bridgetown, Barbados",
+                type: "job",
+                status: "Hiring",
+                price: "$80k/yr",
+                infoFields: [
+                  { icon: <Briefcase size={14} />, label: "Full-Time" },
+                  { icon: <MapPin size={14} />, label: "Remote / Hybrid" }
+                ]
+              }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-24 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 blur-[150px] rounded-full pointer-events-none" />
+
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Simple, transparent pricing.</h2>
+            <p className="text-xl text-gray-400">Start for free, upgrade as you grow.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Free Tier */}
+            <div className="bg-[#111] border border-[#222] rounded-3xl p-8 relative">
+              <h3 className="text-xl font-bold text-gray-400 mb-2">Starter</h3>
+              <div className="text-4xl font-bold text-white mb-6">$0 <span className="text-sm font-normal text-gray-500">/mo</span></div>
+              <ul className="space-y-4 mb-8 text-gray-300">
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-gray-500" /> 1 User Seat</li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-gray-500" /> Basic Directory Listing</li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-gray-500" /> Manual Quote Builder</li>
+              </ul>
+              <Link href="/signup" className="block w-full text-center py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold transition-colors">Start Free</Link>
             </div>
 
-            <div className="w-full max-w-md mx-auto space-y-4">
-              <CountryDropdown
-                selectedCountry={selectedCountry}
-                onSelectCountry={setSelectedCountry}
-                isOpen={isCountryDropdownOpen}
-                setIsOpen={setIsCountryDropdownOpen}
-                theme={theme}
-                countries={countries}
-              />
+            {/* Pro Tier */}
+            <div className="bg-[#161616] border border-orange-500/50 rounded-3xl p-8 relative shadow-2xl shadow-orange-500/10 transform md:-translate-y-4">
+              <div className="absolute top-0 right-0 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-2xl">POPULAR</div>
+              <h3 className="text-xl font-bold text-orange-400 mb-2">Growth</h3>
+              <div className="text-4xl font-bold text-white mb-6">$49 <span className="text-sm font-normal text-gray-500">/mo</span></div>
+              <ul className="space-y-4 mb-8 text-gray-200">
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-orange-500" /> 5 User Seats</li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-orange-500" /> <strong>Embeddable Quote Widget</strong></li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-orange-500" /> Verified Badge</li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-orange-500" /> Analytics Dashboard</li>
+              </ul>
+              <Link href="/signup" className="block w-full text-center py-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold transition-colors">Get Started</Link>
+            </div>
 
-              <div className="text-center text-xs mt-8" style={{ color: t.textMuted }}>
-                Select your country to discover local businesses
-              </div>
+            {/* Enterprise Tier */}
+            <div className="bg-[#111] border border-[#222] rounded-3xl p-8 relative">
+              <h3 className="text-xl font-bold text-gray-400 mb-2">Enterprise</h3>
+              <div className="text-4xl font-bold text-white mb-6">Custom</div>
+              <ul className="space-y-4 mb-8 text-gray-300">
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-gray-500" /> Unlimited Seats</li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-gray-500" /> API Access</li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-gray-500" /> Custom Integrations (CRM)</li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-gray-500" /> Dedicated Support</li>
+              </ul>
+              <Link href="/contact" className="block w-full text-center py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold transition-colors">Contact Sales</Link>
             </div>
           </div>
-        ) : (
-          // Business Directory View
-          <div className="animate-in fade-in slide-in-from-bottom-8 duration-700">
-            {/* Search Bar */}
-            <div className="sticky top-20 z-40 pb-4" style={{ background: t.bg }}>
-              <div className="relative mb-4">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search businesses, services..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-12 py-4 rounded-xl outline-none transition-all duration-300"
-                  style={{
-                    background: t.bgInput,
-                    border: `1px solid ${t.border}`,
-                    color: t.text,
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
-                  }}
-                />
-                <button className="absolute right-4 top-1/2 -translate-y-1/2 p-1.5 rounded-lg hover:bg-white/10 transition-colors">
-                  <Mic className="w-4 h-4 text-orange-500" />
-                </button>
-              </div>
+        </div>
+      </section>
 
-              {/* Industry Filters */}
-              <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-                {industries.map(industry => {
-                  const Icon = industry.icon;
-                  const isSelected = selectedIndustry === industry.id;
-                  return (
-                    <button
-                      key={industry.id}
-                      onClick={() => setSelectedIndustry(industry.id)}
-                      className="flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300"
-                      style={{
-                        background: isSelected
-                          ? 'linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%)'
-                          : t.bgPill,
-                        color: isSelected ? '#fff' : t.textSecondary,
-                        border: isSelected ? 'none' : `1px solid ${t.border}`
-                      }}
-                    >
-                      <Icon className="w-3 h-3" />
-                      <span className="text-sm font-medium">{industry.name}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Results */}
-            <div className="space-y-4">
-              <div className="flex items-center justify-between mb-2">
-                <h2 className="text-lg font-semibold" style={{ color: t.text }}>
-                  {selectedIndustry === 'all' ? 'Featured Businesses' : industries.find(i => i.id === selectedIndustry)?.name}
-                </h2>
-                <span className="text-xs" style={{ color: t.textMuted }}>
-                  {filteredBusinesses.length} results
-                </span>
-              </div>
-
-              {filteredBusinesses.length > 0 ? (
-                filteredBusinesses.map((business, index) => (
-                  <BusinessCard
-                    key={business.id}
-                    business={business}
-                    onVoiceChat={handleVoiceChat}
-                    onTextChat={handleTextChat}
-                    index={index}
-                    theme={theme}
-                  />
-                ))
-              ) : (
-                <div className="text-center py-20 rounded-2xl border" style={{ borderColor: t.border, background: t.bgCard }}>
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: t.bgPill }}>
-                    <Search className="w-8 h-8 opacity-40" style={{ color: t.text }} />
-                  </div>
-                  <h3 className="text-lg font-medium mb-2" style={{ color: t.text }}>No businesses found</h3>
-                  <p className="text-sm max-w-xs mx-auto" style={{ color: t.textSecondary }}>
-                    Try adjusting your search or selecting a different industry.
-                  </p>
-                  <button
-                    onClick={() => { setSearchQuery(''); setSelectedIndustry('all'); }}
-                    className="mt-6 px-6 py-2 rounded-xl text-sm font-medium transition-colors hover:opacity-90"
-                    style={{ background: t.bgSolid, color: t.text, border: `1px solid ${t.border}` }}
-                  >
-                    Clear Filters
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Back to Country Selection floating button */}
-            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-30">
-              <button
-                onClick={() => setSelectedCountry(null)}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 active:scale-95"
-                style={{
-                  background: 'rgba(15, 15, 24, 0.8)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  color: 'white'
-                }}
-              >
-                <ArrowRight className="w-4 h-4 rotate-180" />
-                <span className="text-sm font-medium">Change Country</span>
-              </button>
-            </div>
+      {/* Footer */}
+      <footer className="bg-[#050505] border-t border-[#1F1F1F] py-12">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-2 opacity-50">
+            <CBConnectLogo size="small" />
+            <span className="font-semibold">CB Connect</span>
           </div>
-        )}
-      </main>
+          <div className="text-sm text-gray-500">
+            © 2026 CB Connect. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

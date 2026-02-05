@@ -11,11 +11,14 @@ interface CountryDropdownProps {
     isOpen: boolean;
     setIsOpen: (isOpen: boolean) => void;
     theme: 'dark' | 'light';
+    countries?: any[];
 }
 
-export const CountryDropdown: React.FC<CountryDropdownProps> = ({ selectedCountry, onSelectCountry, isOpen, setIsOpen, theme }) => {
-    const memberStates = countries.filter(c => !c.associate);
-    const associateMembers = countries.filter(c => c.associate);
+export const CountryDropdown: React.FC<CountryDropdownProps> = ({ selectedCountry, onSelectCountry, isOpen, setIsOpen, theme, countries = [] }) => {
+    // If countries prop provided, use it, otherwise fall back to imported (though we want to deprecate imported)
+    const dataToUse = countries.length > 0 ? countries : [];
+    const memberStates = dataToUse.filter(c => !c.associate);
+    const associateMembers = dataToUse.filter(c => c.associate);
     const t = themes[theme];
 
     return (
