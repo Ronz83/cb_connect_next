@@ -2,6 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
+import { syncToGHL } from '@/app/actions/ghl';
 
 export async function updateBusinessProfile(businessId: number, formData: any) {
     const supabase = await createClient();
@@ -39,6 +40,14 @@ export async function updateBusinessProfile(businessId: number, formData: any) {
         .eq('id', businessId);
 
     if (error) return { success: false, error: error.message };
+
+    // Trigger GHL Sync
+    try {
+        await syncToGHL(user.id);
+    } catch (err) {
+        console.error("GHL Sync Failed", err);
+        // Don't fail the request if sync fails, just log it
+    }
 
     revalidatePath('/dashboard/profile');
     revalidatePath(`/business/${businessId}`); // Revalidate public page

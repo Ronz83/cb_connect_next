@@ -17,9 +17,20 @@ export default async function QuoteNowPage() {
 
     if (!profile?.business_id) {
         return (
-            <div className="p-8 text-center bg-[#111] rounded-2xl border border-[#222]">
-                <h2 className="text-xl font-bold text-orange-500">No Business Linked</h2>
-                <p className="text-gray-400 mt-2">You must have a registered business to verify quote parameters.</p>
+            <div className="animate-in fade-in max-w-5xl mx-auto">
+                <h1 className="text-3xl font-bold mb-2 text-foreground">QuoteNow Engine ⚡</h1>
+                <p className="text-muted-foreground mb-8">Define the questions customers must answer to get a quote.</p>
+
+                <div className="bg-card border-l-4 border-primary shadow-sm p-8 rounded-r-xl flex flex-col items-center text-center">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
+                    </div>
+                    <h2 className="text-2xl font-bold text-foreground mb-2">No Business Linked</h2>
+                    <p className="text-muted-foreground max-w-md mb-6">You must have a registered business to configure the Quote Engine.</p>
+                    <button className="px-6 py-3 bg-primary text-primary-foreground font-bold rounded-lg hover:bg-primary/90 transition-colors">
+                        Register Business
+                    </button>
+                </div>
             </div>
         );
     }
@@ -37,8 +48,8 @@ export default async function QuoteNowPage() {
         <div className="animate-in fade-in max-w-5xl mx-auto">
             <div className="flex items-center justify-between mb-8">
                 <div>
-                    <h1 className="text-3xl font-bold mb-2">QuoteNow Engine ⚡</h1>
-                    <p className="text-gray-400">Define the questions customers must answer to get a quote.</p>
+                    <h1 className="text-3xl font-bold mb-2 text-foreground">QuoteNow Engine ⚡</h1>
+                    <p className="text-muted-foreground">Define the questions customers must answer to get a quote.</p>
                 </div>
             </div>
 
@@ -51,27 +62,27 @@ export default async function QuoteNowPage() {
                 </div>
 
                 <div className="space-y-6">
-                    <div className="bg-[#111] border border-[#222] p-6 rounded-2xl">
-                        <h3 className="font-bold text-white mb-4">How it works</h3>
-                        <ul className="space-y-3 text-sm text-gray-400">
+                    <div className="bg-card border border-border p-6 rounded-2xl shadow-sm">
+                        <h3 className="font-bold text-foreground mb-4">How it works</h3>
+                        <ul className="space-y-3 text-sm text-muted-foreground">
                             <li className="flex gap-2">
-                                <span className="bg-orange-500/10 text-orange-500 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">1</span>
+                                <span className="bg-accent/10 text-accent-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold ring-1 ring-accent/20">1</span>
                                 Add fields for information you need (e.g. "Roof Size").
                             </li>
                             <li className="flex gap-2">
-                                <span className="bg-orange-500/10 text-orange-500 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">2</span>
+                                <span className="bg-accent/10 text-accent-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold ring-1 ring-accent/20">2</span>
                                 Customers see a "Get Quote" button on your profile.
                             </li>
                             <li className="flex gap-2">
-                                <span className="bg-orange-500/10 text-orange-500 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">3</span>
+                                <span className="bg-accent/10 text-accent-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold ring-1 ring-accent/20">3</span>
                                 Submissions appear here in your dashboard.
                             </li>
                         </ul>
                     </div>
 
-                    <div className="bg-blue-500/10 border border-blue-500/20 p-6 rounded-2xl">
-                        <h3 className="font-bold text-blue-400 mb-2">Pro Tip</h3>
-                        <p className="text-sm text-gray-400">
+                    <div className="bg-primary/5 border border-primary/20 p-6 rounded-2xl">
+                        <h3 className="font-bold text-primary mb-2">Pro Tip</h3>
+                        <p className="text-sm text-muted-foreground">
                             Short forms convert better. Only ask for what is absolutely necessary for an initial estimate.
                         </p>
                     </div>

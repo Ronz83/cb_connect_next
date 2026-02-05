@@ -21,40 +21,45 @@ export default async function BusinessDashboard() {
 
             {/* Quick Stats Placeholder */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div className="p-6 rounded-2xl bg-[#111] border border-[#222]">
-                    <div className="flex items-center gap-3 mb-2 text-orange-500">
+                <div className="p-6 rounded-2xl bg-card border border-border shadow-sm">
+                    <div className="flex items-center gap-3 mb-2 text-accent">
                         <FileText size={20} />
-                        <span className="text-sm font-medium text-gray-400">Quote Requests</span>
+                        <span className="text-sm font-medium text-muted-foreground">Quote Requests</span>
                     </div>
-                    <div className="text-3xl font-bold">0</div>
+                    <div className="text-3xl font-bold text-foreground">0</div>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-[#111] border border-[#222]">
-                    <div className="flex items-center gap-3 mb-2 text-blue-500">
+                <div className="p-6 rounded-2xl bg-card border border-border shadow-sm">
+                    <div className="flex items-center gap-3 mb-2 text-primary">
                         <MousePointerClick size={20} />
-                        <span className="text-sm font-medium text-gray-400">Profile Views</span>
+                        <span className="text-sm font-medium text-muted-foreground">Profile Views</span>
                     </div>
-                    <div className="text-3xl font-bold">0</div>
+                    <div className="text-3xl font-bold text-foreground">0</div>
                 </div>
             </div>
 
             {!business && (
-                <div className="bg-yellow-500/10 border border-yellow-500/20 p-6 rounded-xl text-yellow-200">
-                    <h3 className="font-bold text-lg mb-2">No Business Linked</h3>
-                    <p>It looks like your account hasn't been linked to a business listing yet. Please contact support.</p>
+                <div className="bg-card border-l-4 border-primary shadow-sm p-6 rounded-r-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div>
+                        <h3 className="font-bold text-lg text-foreground mb-1">No Business Linked</h3>
+                        <p className="text-muted-foreground">Your account is not yet associated with a business listing. Link your business to unlock dashboard features.</p>
+                    </div>
+                    <button className="px-5 py-2.5 bg-primary text-primary-foreground font-bold rounded-lg hover:bg-primary/90 transition-colors whitespace-nowrap">
+                        Contact Support
+                    </button>
                 </div>
             )}
 
             {business && (
-                <div className="bg-[#111] border border-[#222] rounded-2xl p-6">
-                    <h3 className="font-bold text-xl mb-4">Your Listing</h3>
+                <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
+                    <h3 className="font-bold text-xl mb-4 text-foreground">Your Listing</h3>
                     <div className="flex items-center gap-4">
                         {business.logo_url && (
                             <img src={business.logo_url} alt="Logo" className="w-16 h-16 rounded-xl object-cover" />
                         )}
                         <div>
-                            <div className="font-bold text-lg">{business.name}</div>
-                            <div className="text-gray-400">{business.address}</div>
+                            <div className="font-bold text-lg text-foreground">{business.name}</div>
+                            <div className="text-muted-foreground">{business.address}</div>
                         </div>
                     </div>
                 </div>

@@ -50,7 +50,11 @@ export async function updateSession(request: NextRequest) {
         const path = request.nextUrl.pathname;
 
         // A. Protect /admin routes (Super Admin Only)
-        if (path.startsWith('/admin') && role !== 'super_admin') {
+        // A. Protect /admin routes (Super Admin Only)
+        // Bypass if email matches env var
+        const isSuperAdminEmail = user.email === process.env.NEXT_PUBLIC_SUPER_ADMIN_EMAIL;
+
+        if (path.startsWith('/admin') && role !== 'super_admin' && !isSuperAdminEmail) {
             // Redirect unauthorized users to their dashboard
             const url = request.nextUrl.clone();
             url.pathname = '/dashboard';
@@ -58,13 +62,13 @@ export async function updateSession(request: NextRequest) {
         }
 
         // B. Protect /dashboard routes (Business/Partner Only)
-        // Actually, Super Admins can probably visit dashboard too if they want, 
-        // but let's redirect Super Admin to /admin if they try to hit root /dashboard to avoid confusion?
-        // For now, let's just say if you are at Login and you are logged in:
+        // Super Admins (by role or email) can access dashboard freely.
+        // We only redirect if they are at LOGIN page.
 
         if (path.startsWith('/login')) {
             const url = request.nextUrl.clone();
-            if (role === 'super_admin') {
+            // Default landing: Admin -> Admin Panel, Others -> Dashboard
+            if (role === 'super_admin' || isSuperAdminEmail) {
                 url.pathname = '/admin';
             } else {
                 url.pathname = '/dashboard';

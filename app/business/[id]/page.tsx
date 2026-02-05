@@ -15,10 +15,10 @@ export default function BusinessDetailsPage() {
     if (!business) {
         // In a real app we'd trigger notFound(), but for this mock setup let's just show a message or fallback
         return (
-            <div className="min-h-screen bg-[#050505] text-white flex items-center justify-center">
+            <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
                 <div className="text-center">
                     <h1 className="text-4xl font-bold mb-4">Business Not Found</h1>
-                    <p className="text-gray-400">The business you are looking for (ID: {id}) does not exist in our demo data.</p>
+                    <p className="text-muted-foreground">The business you are looking for (ID: {id}) does not exist in our demo data.</p>
                 </div>
             </div>
         );
@@ -34,6 +34,6 @@ export default function BusinessDetailsPage() {
     };
 
     return (
-        <ThemeDetailsPage listing={detailsProps} theme="dark" />
+        <ThemeDetailsPage listing={detailsProps} />
     );
 }

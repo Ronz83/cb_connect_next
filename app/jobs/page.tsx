@@ -7,8 +7,8 @@ import { MOCK_JOBS } from '@/data/mock-data';
 
 export default function JobsPage() {
     return (
-        <div className="min-h-screen bg-[#050505] text-white font-sans pb-20">
-            <ThemeHeader theme="dark" transparent={true} />
+        <div className="min-h-screen bg-background text-foreground font-sans pb-20">
+            <ThemeHeader transparent={true} />
             <div className="pt-32 pb-12 px-4 max-w-7xl mx-auto">
                 <div className="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <ThemeHeroSearch />
@@ -17,7 +17,7 @@ export default function JobsPage() {
                 <div className="flex items-center justify-between mb-8 animate-in fade-in slide-in-from-bottom-6 delay-100">
                     <div>
                         <h1 className="text-3xl font-bold mb-2">Career Opportunities</h1>
-                        <p className="text-gray-400">Find your next role in the Caribbean tech and business ecosystem.</p>
+                        <p className="text-muted-foreground">Find your next role in the Caribbean tech and business ecosystem.</p>
                     </div>
                 </div>
 

@@ -4,8 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { FloatingParticles } from '@/components/FloatingParticles';
 import { CBConnectLogo } from '@/components/CBConnectLogo';
 import { ChatPopup } from '@/components/ChatPopup';
-import { themes, ThemeType } from '@/lib/themes';
-import { industries } from '@/data/industries';
+import { useTheme } from 'next-themes';
 import { NavigationMenu } from '@/components/NavigationMenu';
 import { LayoutGrid, List } from 'lucide-react';
 
@@ -16,7 +15,8 @@ import { ThemeListingCard } from '@/components/themes/MyListing/ThemeListingCard
 import { MOCK_LISTINGS, MOCK_COUNTRIES } from '@/data/mock-data';
 
 export default function SearchPage() {
-    const [theme, setTheme] = useState<ThemeType>('dark');
+    // const [theme, setTheme] = useState<ThemeType>('dark'); // REMOVED
+    const { resolvedTheme } = useTheme();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState<any>(null);
     const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
@@ -30,8 +30,6 @@ export default function SearchPage() {
     const [countries, setCountries] = useState<any[]>(MOCK_COUNTRIES);
     const [businesses, setBusinesses] = useState<any[]>(MOCK_LISTINGS);
     const [isLoading, setIsLoading] = useState(false); // No loading state needed for mock data
-
-    const t = themes[theme];
 
     // Filter businesses (Mock Logic)
     const filteredBusinesses = businesses.filter((b) => {
@@ -54,7 +52,7 @@ export default function SearchPage() {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen flex items-center justify-center transition-colors duration-300" style={{ background: t.bg }}>
+            <div className="min-h-screen flex items-center justify-center bg-background transition-colors duration-300">
                 <CBConnectLogo animated size="large" />
             </div>
         );
@@ -62,10 +60,9 @@ export default function SearchPage() {
 
     return (
         <div
-            className="min-h-screen relative font-sans transition-colors duration-300"
-            style={{ background: t.bg }}
+            className="min-h-screen relative font-sans bg-background text-foreground transition-colors duration-300"
         >
-            <FloatingParticles theme={theme} />
+            <FloatingParticles />
 
             {/* Navigation Menu */}
             <NavigationMenu
@@ -74,10 +71,9 @@ export default function SearchPage() {
                 onNavigateHome={() => {
                     setSelectedCountry(null);
                     setIsMenuOpen(false);
-                    window.location.href = '/'; // Go to actual home in this context? Or just stay here?
-                    // Since this IS the directory, maybe "Home" in the menu should point to "/" (Landing Page)
+                    window.location.href = '/';
                 }}
-                theme={theme}
+                theme={resolvedTheme as any}
             />
 
             {/* Chat Popup */}
@@ -86,11 +82,11 @@ export default function SearchPage() {
                 onClose={() => setChatType(null)}
                 type={chatType}
                 business={selectedBusiness}
-                theme={theme}
+                theme={resolvedTheme as any}
             />
 
             {/* Theme Header */}
-            <ThemeHeader theme={theme} setTheme={setTheme} transparent={false} />
+            <ThemeHeader transparent={false} />
 
             {/* Main Content */}
             <main className="pt-24 pb-20 px-4 max-w-7xl mx-auto min-h-screen flex flex-col relative z-10">
@@ -101,25 +97,24 @@ export default function SearchPage() {
                 </div>
 
                 {/* LISTINGS GRID */}
-                {/* LISTINGS GRID */}
                 <div className="animate-in fade-in slide-in-from-bottom-8 duration-700">
                     <div className="flex items-center justify-between mb-8">
                         <div>
-                            <h2 className="text-2xl font-bold mb-1" style={{ color: t.text }}>Explore Directory</h2>
-                            <p className="text-sm text-gray-400">Showing {filteredBusinesses.length} results</p>
+                            <h2 className="text-2xl font-bold mb-1 text-foreground">Explore Directory</h2>
+                            <p className="text-sm text-muted-foreground">Showing {filteredBusinesses.length} results</p>
                         </div>
 
                         {/* VIEW TOGGLE */}
-                        <div className="flex items-center bg-[#151515] rounded-lg p-1 border border-[#222]">
+                        <div className="flex items-center bg-secondary/50 rounded-lg p-1 border border-border">
                             <button
                                 onClick={() => setViewMode('grid')}
-                                className={`p-2 rounded-md transition-all ${viewMode === 'grid' ? 'bg-[#333] text-white shadow-sm' : 'text-gray-500 hover:text-gray-300'}`}
+                                className={`p-2 rounded-md transition-all ${viewMode === 'grid' ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
                             >
                                 <LayoutGrid size={18} />
                             </button>
                             <button
                                 onClick={() => setViewMode('list')}
-                                className={`p-2 rounded-md transition-all ${viewMode === 'list' ? 'bg-[#333] text-white shadow-sm' : 'text-gray-500 hover:text-gray-300'}`}
+                                className={`p-2 rounded-md transition-all ${viewMode === 'list' ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
                             >
                                 <List size={18} />
                             </button>
@@ -131,7 +126,6 @@ export default function SearchPage() {
                             <ThemeListingCard
                                 key={listing.id}
                                 listing={listing}
-                                theme={theme}
                                 layout={viewMode}
                             />
                         ))}

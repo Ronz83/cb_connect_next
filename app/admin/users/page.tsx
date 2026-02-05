@@ -24,7 +24,7 @@ export default async function AdminUsersPage() {
             <div className="flex items-center justify-between mb-6">
                 <div>
                     <h1 className="text-3xl font-bold">User Management</h1>
-                    <p className="text-gray-400">Manage roles and business assignments.</p>
+                    <p className="text-muted-foreground">Manage roles and business assignments.</p>
                 </div>
             </div>
 

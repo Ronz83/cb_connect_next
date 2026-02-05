@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  /* Light Mode - Caricom Identity */
+  --background: #ffffff;
+  --foreground: #002D56;
+  /* Deep Caricom Navy */
+  --card: #ffffff;
+  --card-foreground: #002D56;
+  --popover: #ffffff;
+  --popover-foreground: #002D56;
+  --primary: #009CA6;
+  /* Caricom Cyan */
+  --primary-foreground: #ffffff;
+  --secondary: #E3F6F8;
+  /* Light Cyan Tint */
+  --secondary-foreground: #002D56;
+  --muted: #F0F9FA;
+  --muted-foreground: #476686;
+  /* Muted Navy */
+  --accent: #F9A400;
+  /* Caricom Gold */
+  --accent-foreground: #002D56;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: #CFE8EB;
+  /* Cyan Border */
+  --input: #CFE8EB;
+  --ring: #009CA6;
+  --radius: 0.75rem;
+}
+
+.dark {
+  /* Dark Mode - Deep Caribbean Night */
+  --background: #00121F;
+  /* Very Deep Navy */
+  --foreground: #E3F6F8;
+  /* Light Cyan Text */
+  --card: #001B2E;
+  /* Slightly Lighter Navy */
+  --card-foreground: #E3F6F8;
+  --popover: #001B2E;
+  --popover-foreground: #E3F6F8;
+  --primary: #00B4D8;
+  /* Bright Cyan */
+  --primary-foreground: #00121F;
+  --secondary: #002D4D;
+  /* Secondary Navy */
+  --secondary-foreground: #E3F6F8;
+  --muted: #002D4D;
+  --muted-foreground: #8AB4CC;
+  /* Muted Cyan Gray */
+  --accent: #F9A400;
+  /* Gold Pop */
+  --accent-foreground: #00121F;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #fafafa;
+  --border: #003355;
+  /* Subtle Navy Border */
+  --input: #003355;
+  --ring: #F9A400;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

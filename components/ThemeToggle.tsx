@@ -1,29 +1,33 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
-interface ThemeToggleProps {
-    theme: 'dark' | 'light';
-    setTheme: (theme: 'dark' | 'light') => void;
-}
+export const ThemeToggle: React.FC = () => {
+    const { theme, setTheme, resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
 
-export const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, setTheme }) => {
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return <div className="w-10 h-10" />; // Placeholder to avoid layout shift
+    }
+
+    const isDark = theme === 'dark' || resolvedTheme === 'dark';
+
     return (
         <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95"
-            style={{
-                background: theme === 'dark'
-                    ? 'rgba(255,255,255,0.05)'
-                    : 'rgba(0,0,0,0.05)',
-                border: `1px solid ${theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`,
-            }}
+            onClick={() => setTheme(isDark ? 'light' : 'dark')}
+            className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 border border-border bg-secondary/50 text-foreground"
+            aria-label="Toggle Theme"
         >
-            {theme === 'dark' ? (
+            {isDark ? (
                 <Sun className="w-5 h-5 text-orange-400" />
             ) : (
-                <Moon className="w-5 h-5 text-orange-500" />
+                <Moon className="w-5 h-5 text-blue-600" />
             )}
         </button>
     );
