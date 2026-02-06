@@ -17,30 +17,44 @@ export default function LandingPage() {
       <ThemeHeader transparent={true} />
 
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden bg-background">
-        {/* Background Gradients */}
-        <div className="absolute inset-0 bg-background">
-          <div className="absolute top-0 -left-10 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[128px]" />
-          <div className="absolute bottom-0 -right-10 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[128px]" />
-          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+        {/* Background Image - Tropical Beach */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?q=80&w=3200&auto=format&fit=crop"
+            alt="Caribbean Beach"
+            className="w-full h-full object-cover"
+          />
+          {/* Overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-background" />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-border animate-fade-in-up backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-sm font-medium text-muted-foreground">Live in 15+ Caribbean Countries</span>
+        <div className="relative z-10 max-w-5xl mx-auto space-y-8 pt-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 border border-white/30 animate-fade-in-up backdrop-blur-md shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_10px_#4ade80]" />
+            <span className="text-sm font-bold text-white tracking-wide shadow-sm">Live in 15+ Caribbean Countries</span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-6 animate-fade-in-up delay-100 leading-tight">
-            Discover the <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Caribbean</span> <br /> Like Never Before.
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 animate-fade-in-up delay-100 leading-tight drop-shadow-xl">
+            The Caribbean's Business Directory <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300 drop-shadow-none">That Helps You Grow</span>
           </h1>
 
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-fade-in-up delay-200">
-            Find top-rated businesses, properties, cars, and jobs across the islands. <br /> The directory built for growth.
+          <p className="text-xl md:text-2xl text-white/90 font-medium max-w-2xl mx-auto mb-10 animate-fade-in-up delay-200 drop-shadow-md">
+            Find trusted businesses, post jobs, and access tools that increase your revenue automatically.
           </p>
 
-          <div className="animate-fade-in-up delay-300">
+          <div className="animate-fade-in-up delay-300 bg-white/10 backdrop-blur-lg p-2 rounded-2xl border border-white/20 shadow-2xl">
             <ThemeHeroSearch />
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-4 animate-fade-in-up delay-500">
+            <Link href="/add-listing" className="px-8 py-3 rounded-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold transition-all shadow-lg hover:shadow-yellow-500/20 hover:-translate-y-1">
+              List Your Business Free
+            </Link>
+            <Link href="/add-listing" className="px-8 py-3 rounded-full bg-white/90 hover:bg-white text-primary font-bold transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+              Post a Job
+            </Link>
           </div>
         </div>
       </section>
@@ -444,15 +458,36 @@ export default function LandingPage() {
       </section>
 
       {/* Island / Country Selector */}
-      <section className="py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-12">Find Businesses in Your Island</h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {['Barbados', 'Trinidad & Tobago', 'Jamaica', 'Guyana', 'St. Lucia', 'Bahamas', 'Antigua', 'Grenada'].map((island) => (
+      <section className="py-24 bg-background overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 text-center mb-12">
+          <h2 className="text-3xl font-bold">Find Businesses in Your Island</h2>
+          <p className="text-muted-foreground mt-2">Serving all Caricom Member States and Associate Members</p>
+        </div>
+
+        <div className="relative w-full overflow-hidden mask-linear-fade">
+          {/* Gradient Masks */}
+          <div className="absolute top-0 left-0 w-32 h-full z-10 bg-gradient-to-r from-background to-transparent" />
+          <div className="absolute top-0 right-0 w-32 h-full z-10 bg-gradient-to-l from-background to-transparent" />
+
+          {/* Carousel Track */}
+          <div className="flex gap-4 animate-marquee w-max">
+            {[
+              // Caricom Members
+              'Antigua and Barbuda', 'Bahamas', 'Barbados', 'Belize', 'Dominica',
+              'Grenada', 'Guyana', 'Haiti', 'Jamaica', 'Montserrat',
+              'St. Kitts and Nevis', 'St. Lucia', 'St. Vincent and Grenadines', 'Suriname', 'Trinidad and Tobago',
+              // Associate Members
+              'Anguilla', 'Bermuda', 'British Virgin Islands', 'Cayman Islands', 'Turks and Caicos',
+              // Duplicate for smooth loop
+              'Antigua and Barbuda', 'Bahamas', 'Barbados', 'Belize', 'Dominica',
+              'Grenada', 'Guyana', 'Haiti', 'Jamaica', 'Montserrat',
+              'St. Kitts and Nevis', 'St. Lucia', 'St. Vincent and Grenadines', 'Suriname', 'Trinidad and Tobago',
+              'Anguilla', 'Bermuda', 'British Virgin Islands', 'Cayman Islands', 'Turks and Caicos'
+            ].map((island, i) => (
               <Link
-                key={island}
+                key={`${island}-${i}`}
                 href={`/search?location=${island.replace(' ', '+')}`}
-                className="px-6 py-3 rounded-xl border border-border hover:border-primary hover:bg-primary/5 hover:text-primary transition-all font-medium text-lg"
+                className="flex-shrink-0 px-8 py-4 rounded-full border border-border bg-card hover:border-primary hover:bg-primary/5 hover:text-primary transition-all font-bold text-lg whitespace-nowrap"
               >
                 {island}
               </Link>
