@@ -6,6 +6,7 @@ import { CBConnectLogo } from '@/components/CBConnectLogo';
 import { NavigationMenu } from '@/components/NavigationMenu';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface ThemeHeaderProps {
     transparent?: boolean;
@@ -50,11 +51,16 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
                     <div className="flex items-center gap-8">
                         {/* Point to main directory home */}
                         <a href="https://dir.caricombusiness.com/" className="flex items-center gap-2">
-                            {/* Reuse Logo but ensure it adapts to color */}
+                            {/* Replaced CB with Image Logo */}
                             <div className={`font-bold text-xl tracking-tight flex items-center gap-2 ${isSolid ? 'text-foreground' : 'text-white'}`}>
-                                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-white shadow-lg">
-                                    <span className="font-bold">CB</span>
-                                </div>
+                                <Image
+                                    src="/assets/cb-logo.png"
+                                    alt="Caricom Business Logo"
+                                    width={48}
+                                    height={48}
+                                    className="w-12 h-12 object-contain"
+                                    priority
+                                />
                                 <span className="hidden md:inline">Directory</span>
                             </div>
                         </a>
