@@ -5,8 +5,8 @@ import { supabase } from '@/utils/supabase/client';
 import { Mail, Lock, Loader, ArrowRight, AlertCircle } from 'lucide-react';
 import { CBConnectLogo } from '@/components/CBConnectLogo';
 
-export default function AuthForm({ type = 'general', title, subtitle }: { type?: 'business' | 'candidate' | 'general', title?: string, subtitle?: string }) {
-    const [isLogin, setIsLogin] = useState(true);
+export default function AuthForm({ type = 'general', title, subtitle, defaultView = 'sign_in' }: { type?: 'business' | 'candidate' | 'general', title?: string, subtitle?: string, defaultView?: 'sign_in' | 'sign_up' }) {
+    const [isLogin, setIsLogin] = useState(defaultView === 'sign_in');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
