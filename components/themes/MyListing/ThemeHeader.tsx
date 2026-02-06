@@ -14,16 +14,18 @@ interface ThemeHeaderProps {
 }
 
 import { useTheme } from 'next-themes';
+import { AuthButton } from '@/components/auth/AuthButton';
 
 export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, theme: propTheme = 'dark', setTheme }) => {
-    const { theme: globalTheme } = useTheme();
+    const { theme: globalTheme, resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
-    const activeTheme = mounted && globalTheme ? (globalTheme as 'light' | 'dark') : propTheme;
+    // safely determine active theme
+    const activeTheme = mounted && resolvedTheme ? (resolvedTheme as 'light' | 'dark') : propTheme;
 
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -46,7 +48,8 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
 
                     {/* LEFT: Logo & Location (Desktop) */}
                     <div className="flex items-center gap-8">
-                        <Link href="/search" className="flex items-center gap-2">
+                        {/* Point to main directory home */}
+                        <a href="https://dir.caricombusiness.com/" className="flex items-center gap-2">
                             {/* Reuse Logo but ensure it adapts to color */}
                             <div className={`font-bold text-xl tracking-tight flex items-center gap-2 ${isSolid ? 'text-foreground' : 'text-white'}`}>
                                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-white shadow-lg">
@@ -54,7 +57,7 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
                                 </div>
                                 <span className="hidden md:inline">Directory</span>
                             </div>
-                        </Link>
+                        </a>
 
                         {/* Desktop Search Bar (Optional, shows on scroll or specific pages) */}
                         <div className={`hidden md:flex items-center gap-3 px-4 py-2 rounded-full transition-all duration-300 ${isSolid ? 'bg-secondary' : 'opacity-0 pointer-events-none'}`}>
@@ -82,12 +85,10 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
                             Pricing
                         </Link>
 
-                        <Link href="/login">
-                            <button className={`hidden md:flex items-center gap-2 px-4 py-2.5 rounded-full font-medium text-sm transition-all ${isSolid ? 'bg-secondary hover:bg-secondary/80 text-foreground' : 'bg-background/20 backdrop-blur-md text-foreground hover:bg-background/40 border border-border/20'}`}>
-                                <User size={16} />
-                                <span>Sign In</span>
-                            </button>
-                        </Link>
+                        {/* Integrated Auth State */}
+                        <div className="hidden md:block">
+                            <AuthButton theme={activeTheme} />
+                        </div>
 
                         <button className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-sm shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5">
                             <Plus size={16} />

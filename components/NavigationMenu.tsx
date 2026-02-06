@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { Home, Info, Mail, Sparkles, X, ArrowRight, LayoutDashboard } from 'lucide-react';
+import { Home, Info, Mail, Sparkles, X, ArrowRight, LayoutDashboard, Search } from 'lucide-react';
 import { CBConnectLogo } from './CBConnectLogo';
 import { themes } from '@/lib/themes';
 
@@ -13,7 +13,8 @@ interface NavigationMenuProps {
 }
 
 export const NavigationMenu: React.FC<NavigationMenuProps> = ({ isOpen, onClose, onNavigateHome, theme = 'dark' }) => {
-    const t = themes[theme] || themes['dark'];
+    // Ensure we have a valid theme object, fallback to dark
+    const t = (theme && themes[theme]) ? themes[theme] : themes['dark'];
 
     // Close menu on Escape key
     useEffect(() => {
@@ -78,13 +79,30 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({ isOpen, onClose,
 
                     <button
                         onClick={() => {
+                            window.location.href = 'https://dir.caricombusiness.com/';
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-4 rounded-xl transition-all duration-200 group"
+                        style={{ color: t.text }}
+                    >
+                        <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-blue-500/10 text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                            <Home className="w-5 h-5" />
+                        </div>
+                        <div className="text-left flex-1">
+                            <div className="font-medium">Home</div>
+                            <div className="text-xs opacity-60">Directory Homepage</div>
+                        </div>
+                        <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1" />
+                    </button>
+
+                    <button
+                        onClick={() => {
                             window.location.href = '/search';
                         }}
                         className="w-full flex items-center gap-3 px-4 py-4 rounded-xl transition-all duration-200 group"
                         style={{ color: t.text }}
                     >
                         <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-orange-500/10 text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                            <Home className="w-5 h-5" />
+                            <Search className="w-5 h-5" />
                         </div>
                         <div className="text-left flex-1">
                             <div className="font-medium">Find a Pro</div>
