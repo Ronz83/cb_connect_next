@@ -12,7 +12,7 @@ export default function JobsMarketingPage() {
             <PageHero
                 title="The Future of Work Is Right Here."
                 subtitle="Connect with top-tier Caribbean talent or find your dream role with our AI-powered matchmaking engine."
-                backgroundImage="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2940&auto=format&fit=crop"
+                backgroundImage="/assets/bg/coolbackgrounds-fractalize-clear_lagoon.png"
             >
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                     <Link href="/jobs/browse" className="w-full sm:w-auto px-8 py-4 bg-white/20 backdrop-blur-md border border-white/20 text-white font-bold rounded-xl hover:bg-white/30 transition-all flex items-center justify-center gap-2">

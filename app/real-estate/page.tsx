@@ -15,7 +15,7 @@ export default function RealEstatePage() {
             <PageHero
                 title="Real Estate"
                 subtitle="Discover properties for sale and rent across the Caribbean."
-                backgroundImage="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2942&auto=format&fit=crop"
+                backgroundImage="/assets/bg/coolbackgrounds-gradient-aqua.png"
             >
                 <div className="max-w-2xl mx-auto backdrop-blur-md bg-white/10 p-4 rounded-2xl border border-white/20 shadow-2xl">
                     <ThemeHeroSearch />

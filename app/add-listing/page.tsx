@@ -38,7 +38,7 @@ export default function AddListingPage() {
             <PageHero
                 title="What would you like to list?"
                 subtitle="Select a category to begin your journey with CB Connect."
-                backgroundImage="https://images.unsplash.com/photo-1554774853-719586f8c277?q=80&w=2800&auto=format&fit=crop"
+                backgroundImage="/assets/bg/coolbackgrounds-gradient-ocean.png"
             >
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white font-medium text-sm">
                     <Plus className="w-4 h-4" /> Start Your Application

@@ -44,7 +44,7 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
 
     return (
         <>
-            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isSolid ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-sm' : 'bg-transparent'}`}>
+            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isSolid ? 'bg-background/80 backdrop-blur-xl border-b border-white/10 shadow-sm' : 'bg-transparent'}`}>
                 <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
 
                     {/* LEFT: Logo & Location (Desktop) */}
@@ -52,7 +52,7 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
                         {/* Point to main directory home */}
                         <a href="https://dir.caricombusiness.com/" className="flex items-center gap-2">
                             {/* Replaced CB with Image Logo */}
-                            <div className={`font-bold text-xl tracking-tight flex items-center gap-2 ${isSolid || activeTheme === 'light' ? 'text-foreground' : 'text-white'}`}>
+                            <div className={`font-bold text-xl tracking-tight flex items-center gap-2 ${isSolid ? 'text-foreground' : (activeTheme === 'light' ? 'text-white' : 'text-foreground')}`}>
                                 <Image
                                     src="/assets/cb-logo.png"
                                     alt="Caricom Business Logo"
@@ -61,7 +61,7 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
                                     className="w-12 h-12 object-contain rounded-xl"
                                     priority
                                 />
-                                <span className="hidden md:inline">Directory</span>
+                                <span className={`hidden md:inline ${!isSolid && activeTheme === 'light' ? 'text-white drop-shadow-md' : ''}`}>Directory</span>
                             </div>
                         </a>
 

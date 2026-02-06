@@ -16,7 +16,7 @@ export default function AutosPage() {
             <PageHero
                 title="Caribbean Autos"
                 subtitle="Find new & used cars for sale or rent across the islands."
-                backgroundImage="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2940&auto=format&fit=crop"
+                backgroundImage="/assets/bg/coolbackgrounds-gradient-cool.png"
             >
                 <div className="max-w-2xl mx-auto backdrop-blur-md bg-white/10 p-4 rounded-2xl border border-white/20 shadow-2xl">
                     <ThemeHeroSearch />

@@ -39,8 +39,8 @@ export const ThemeListingCard: React.FC<{ listing: ListingProps; theme?: 'light'
 
     // Premium Logic: Golden border/glow, slightly larger
     const wrapperClasses = isPremium
-        ? "group relative rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 bg-card border-2 border-yellow-500/50 shadow-xl shadow-yellow-500/10 hover:shadow-yellow-500/20 h-full"
-        : "group relative rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 bg-card border border-border hover:shadow-xl hover:border-primary/50 h-full";
+        ? "group relative rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 bg-card border border-yellow-500/50 shadow-lg shadow-yellow-500/10 hover:shadow-2xl hover:shadow-yellow-500/20 h-full ring-1 ring-yellow-500/20"
+        : "group relative rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 bg-card border border-border/60 hover:border-primary/50 shadow-sm hover:shadow-xl h-full dark:shadow-none dark:hover:shadow-primary/10";
 
     const cardContent = (
         <div className={wrapperClasses}>

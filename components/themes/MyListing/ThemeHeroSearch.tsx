@@ -59,7 +59,7 @@ export const ThemeHeroSearch = () => {
             </div>
 
             {/* Search Box */}
-            <div className="bg-card/80 backdrop-blur-xl border border-border rounded-2xl p-4 shadow-2xl">
+            <div className="bg-card/90 backdrop-blur-xl border border-white/20 rounded-2xl p-4 shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
                 <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-3">
 
                     {/* Keyword Input */}
