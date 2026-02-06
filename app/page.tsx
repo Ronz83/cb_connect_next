@@ -328,71 +328,216 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-24 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 blur-[150px] rounded-full pointer-events-none" />
-
-        <div className="relative max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">Simple, transparent pricing.</h2>
-            <p className="text-xl text-gray-400">Start for free, upgrade as you grow.</p>
+      {/* Job Board Preview */}
+      <section className="py-20 bg-secondary/20 border-y border-border">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+            <div>
+              <h2 className="text-3xl font-bold mb-2">Find Opportunities Across the Caribbean</h2>
+              <p className="text-muted-foreground">Jobs that create daily returning traffic.</p>
+            </div>
+            <Link href="/jobs" className="px-6 py-3 rounded-full bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-colors inline-block text-center">
+              View All Jobs
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Free Tier */}
-            <div className="bg-card border border-border rounded-3xl p-8 relative shadow-sm">
-              <h3 className="text-xl font-bold text-muted-foreground mb-2">Starter</h3>
-              <div className="text-4xl font-bold text-foreground mb-6">$0 <span className="text-sm font-normal text-muted-foreground">/mo</span></div>
-              <ul className="space-y-4 mb-8 text-muted-foreground">
-                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-muted-foreground" /> 1 User Seat</li>
-                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-muted-foreground" /> Basic Directory Listing</li>
-                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-muted-foreground" /> Manual Quote Builder</li>
-              </ul>
-              <Link href="/signup" className="block w-full text-center py-3 rounded-xl bg-secondary hover:bg-secondary/80 text-foreground font-bold transition-colors">Start Free</Link>
-            </div>
+          <div className="grid gap-4">
+            {[
+              { role: 'Customer Service Rep', company: 'Island Telecom', location: 'Barbados', type: 'Full-time', ago: '2h ago' },
+              { role: 'Sales Manager', company: 'Carib Brewery', location: 'Jamaica', type: 'Full-time', ago: '5h ago' },
+              { role: 'Remote Designer', company: 'Creative Digital', location: 'Caribbean-wide', type: 'Contract', ago: '1d ago' },
+              { role: 'Head Chef', company: 'Royal Resorts', location: 'St. Lucia', type: 'Full-time', ago: '2d ago' },
+            ].map((job, i) => (
+              <div key={i} className="group flex flex-col md:flex-row md:items-center justify-between p-6 rounded-2xl bg-card border border-border hover:border-primary/50 hover:shadow-lg transition-all">
+                <div className="flex items-center gap-4 mb-4 md:mb-0">
+                  <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-xl font-bold text-muted-foreground">
+                    {job.company[0]}
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg group-hover:text-primary transition-colors">{job.role}</h3>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span>{job.company}</span>
+                      <span>•</span>
+                      <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {job.location}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between md:justify-end gap-4">
+                  <span className="px-3 py-1 rounded-full bg-secondary text-xs font-medium">{job.type}</span>
+                  <span className="text-sm text-muted-foreground">{job.ago}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            {/* Pro Tier */}
-            <div className="bg-[#161616] border border-orange-500/50 rounded-3xl p-8 relative shadow-2xl shadow-orange-500/10 transform md:-translate-y-4">
-              <div className="absolute top-0 right-0 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-2xl">POPULAR</div>
-              <h3 className="text-xl font-bold text-orange-400 mb-2">Growth</h3>
-              <div className="text-4xl font-bold text-white mb-6">$49 <span className="text-sm font-normal text-gray-500">/mo</span></div>
-              <ul className="space-y-4 mb-8 text-gray-200">
-                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-orange-500" /> 5 User Seats</li>
-                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-orange-500" /> <strong>Embeddable Quote Widget</strong></li>
-                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-orange-500" /> Verified Badge</li>
-                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-orange-500" /> Analytics Dashboard</li>
-              </ul>
-              <Link href="/signup" className="block w-full text-center py-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold transition-colors">Get Started</Link>
-            </div>
+      {/* SaaS / Growth Tools */}
+      <section className="py-24 relative overflow-hidden bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="text-primary font-bold tracking-wider text-xs uppercase mb-2 block">Monetization & Growth</span>
+            <h2 className="text-4xl font-bold mb-4">Tools That Help Your Business Grow 24/7</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Automate your operations with our integrated suite of tools.</p>
+          </div>
 
-            {/* Enterprise Tier */}
-            <div className="bg-card border border-border rounded-3xl p-8 relative shadow-sm">
-              <h3 className="text-xl font-bold text-muted-foreground mb-2">Enterprise</h3>
-              <div className="text-4xl font-bold text-foreground mb-6">Custom</div>
-              <ul className="space-y-4 mb-8 text-muted-foreground">
-                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-muted-foreground" /> Unlimited Seats</li>
-                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-muted-foreground" /> API Access</li>
-                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-muted-foreground" /> Custom Integrations (CRM)</li>
-                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-muted-foreground" /> Dedicated Support</li>
-              </ul>
-              <Link href="/contact" className="block w-full text-center py-3 rounded-xl bg-secondary hover:bg-secondary/80 text-foreground font-bold transition-colors">Contact Sales</Link>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { title: 'CRM & Pipeline', desc: 'Track every lead', icon: <BarChart3 className="w-6 h-6" />, color: 'bg-blue-500' },
+              { title: 'Automation', desc: 'Follow up automatically', icon: <Zap className="w-6 h-6" />, color: 'bg-yellow-500' },
+              { title: 'Website & Funnels', desc: 'Convert visitors', icon: <LayoutDashboard className="w-6 h-6" />, color: 'bg-purple-500' },
+              { title: 'Booking System', desc: 'Schedule instantly', icon: <PlayCircle className="w-6 h-6" />, color: 'bg-green-500' },
+            ].map((tool, i) => (
+              <div key={i} className="p-6 rounded-2xl border border-border bg-card hover:translate-y-[-4px] transition-transform duration-300">
+                <div className={`w-12 h-12 rounded-xl ${tool.color} bg-opacity-10 flex items-center justify-center mb-4 text-${tool.color.split('-')[1]}-500`}>
+                  {tool.icon}
+                </div>
+                <h3 className="font-bold text-lg mb-2">{tool.title}</h3>
+                <p className="text-sm text-muted-foreground">{tool.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Dashboard Preview Mockup */}
+          <div className="mt-16 rounded-3xl border border-border bg-card shadow-2xl overflow-hidden relative group">
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
+            <div className="p-8 md:p-12 text-center relative z-20">
+              <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-background/80 backdrop-blur border border-border shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span className="text-sm font-medium">Analytics Dashboard Live</span>
+              </div>
+              {/* Placeholder for complex dashboard image - using CSS/Divs for structure if no image */}
+              <div className="w-full aspect-[16/9] bg-secondary/50 rounded-xl border border-dashed border-border flex items-center justify-center text-muted-foreground">
+                <div className="text-center">
+                  <BarChart3 className="w-16 h-16 mx-auto mb-4 opacity-20" />
+                  <p>Interactive Revenue Dashboard Mockup</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-background border-t border-border py-12">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2 opacity-50">
-            <CBConnectLogo size="small" />
-            <span className="font-semibold text-foreground">CB Connect</span>
+      {/* Success Stories */}
+      <section className="py-20 bg-secondary/10 border-y border-border">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Success Stories</h2>
+            <p className="text-muted-foreground">Real results from Caribbean businesses.</p>
           </div>
-          <div className="text-sm text-muted-foreground">
-            © 2026 CB Connect. All rights reserved.
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { role: 'Local Plumber', result: '3x', metric: 'More Calls', desc: 'Optimized profile & verified badge.' },
+              { role: 'Boutique Hotel', result: '40%', metric: 'More Bookings', desc: 'Used our automated booking tool.' },
+              { role: 'Recruiter', result: '5', metric: 'Jobs Filled', desc: 'In just 2 weeks using job board.' },
+            ].map((story, i) => (
+              <div key={i} className="bg-card p-8 rounded-2xl border border-border text-center shadow-lg hover:shadow-xl transition-all">
+                <div className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary font-bold text-sm mb-4">{story.role}</div>
+                <div className="text-5xl font-extrabold text-foreground mb-2">{story.result}</div>
+                <div className="text-xl font-bold text-muted-foreground mb-4">{story.metric}</div>
+                <p className="text-sm opacity-80">{story.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Island / Country Selector */}
+      <section className="py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold mb-12">Find Businesses in Your Island</h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {['Barbados', 'Trinidad & Tobago', 'Jamaica', 'Guyana', 'St. Lucia', 'Bahamas', 'Antigua', 'Grenada'].map((island) => (
+              <Link
+                key={island}
+                href={`/search?location=${island.replace(' ', '+')}`}
+                className="px-6 py-3 rounded-xl border border-border hover:border-primary hover:bg-primary/5 hover:text-primary transition-all font-medium text-lg"
+              >
+                {island}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-32 bg-primary text-primary-foreground relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-black/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8">Ready to Grow Your Business?</h2>
+          <p className="text-xl opacity-90 mb-12 max-w-2xl mx-auto">Join the Caribbean's fastest growing digital economy today.</p>
+
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+            <Link href="/add-listing" className="w-full md:w-auto px-8 py-4 bg-white text-primary rounded-full font-bold text-lg hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+              List Your Business
+            </Link>
+            <Link href="/add-listing" className="w-full md:w-auto px-8 py-4 bg-primary-foreground/10 border border-white/20 text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all">
+              Post a Job
+            </Link>
+            <Link href="/search" className="w-full md:w-auto px-8 py-4 text-white font-medium hover:underline opacity-80 hover:opacity-100">
+              Explore Directory
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer (Simplified for Page) */}
+      <footer className="py-16 bg-card border-t border-border">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12">
+          <div className="col-span-2 lg:col-span-2">
+            <CBConnectLogo />
+            <p className="mt-6 text-muted-foreground max-w-xs">
+              The trusted platform for Caribbean businesses, jobs, and growth tools.
+            </p>
+            <div className="flex gap-4 mt-6">
+              {/* Social Placeholders */}
+              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-white transition-colors cursor-pointer"><Globe size={18} /></div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-bold mb-6">Directory</h4>
+            <ul className="space-y-4 text-sm text-muted-foreground">
+              <li><Link href="/search" className="hover:text-primary">All Categories</Link></li>
+              <li><Link href="/search?sort=popular" className="hover:text-primary">Popular Businesses</Link></li>
+              <li><Link href="/search?verified=true" className="hover:text-primary">Verified Listings</Link></li>
+              <li><Link href="/search?sort=newest" className="hover:text-primary">New Additions</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold mb-6">Growth Tools</h4>
+            <ul className="space-y-4 text-sm text-muted-foreground">
+              <li><Link href="#" className="hover:text-primary">Post a Job</Link></li>
+              <li><Link href="#" className="hover:text-primary">SaaS Dashboard</Link></li>
+              <li><Link href="#" className="hover:text-primary">Pricing Plans</Link></li>
+              <li><Link href="#" className="hover:text-primary">Success Stories</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold mb-6">Company</h4>
+            <ul className="space-y-4 text-sm text-muted-foreground">
+              <li><Link href="#" className="hover:text-primary">About Us</Link></li>
+              <li><Link href="#" className="hover:text-primary">Partner Program</Link></li>
+              <li><Link href="#" className="hover:text-primary">Privacy Policy</Link></li>
+              <li><Link href="#" className="hover:text-primary">Terms of Service</Link></li>
+            </ul>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between text-sm text-muted-foreground">
+          <p>&copy; {new Date().getFullYear()} Caricom Business Directory. All rights reserved.</p>
+          <div className="flex items-center gap-6 mt-4 md:mt-0">
+            <Link href="#" className="hover:text-foreground">Privacy</Link>
+            <Link href="#" className="hover:text-foreground">Terms</Link>
+            <Link href="#" className="hover:text-foreground">Sitemap</Link>
           </div>
         </div>
       </footer>
-    </div>
+    </div >
   );
 }
