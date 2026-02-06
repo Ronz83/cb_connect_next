@@ -13,6 +13,9 @@ import { ThemeHeader } from '@/components/themes/MyListing/ThemeHeader';
 import { ThemeHeroSearch } from '@/components/themes/MyListing/ThemeHeroSearch';
 import { ThemeListingCard } from '@/components/themes/MyListing/ThemeListingCard';
 import { MOCK_LISTINGS, MOCK_COUNTRIES } from '@/data/mock-data';
+import { PageHero } from '@/components/PageHero';
+
+
 
 export default function SearchPage() {
     // const [theme, setTheme] = useState<ThemeType>('dark'); // REMOVED
@@ -92,8 +95,16 @@ export default function SearchPage() {
             <main className="pt-24 pb-20 px-4 max-w-7xl mx-auto min-h-screen flex flex-col relative z-10">
 
                 {/* HERO SEARCH SECTION */}
-                <div className="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <ThemeHeroSearch />
+                <div className="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500 -mt-24">
+                    <PageHero
+                        title="Find Your Perfect Match"
+                        subtitle="Explore top-rated businesses and verified listings across the Caribbean."
+                        backgroundImage="https://images.unsplash.com/photo-1589307357924-4fc3a0279644?q=80&w=2940&auto=format&fit=crop"
+                    >
+                        <div className="max-w-3xl mx-auto backdrop-blur-md bg-white/10 p-2 rounded-2xl border border-white/20 shadow-2xl">
+                            <ThemeHeroSearch />
+                        </div>
+                    </PageHero>
                 </div>
 
                 {/* LISTINGS GRID */}
