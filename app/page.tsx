@@ -101,22 +101,26 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Featured Listings Grid */}
-      <section id="features" className="py-24 bg-secondary/30 border-y border-border">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* Premium Directory Section */}
+      <section className="py-24 bg-gradient-to-b from-secondary/20 to-secondary/40 border-y border-yellow-500/10 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex items-center justify-between mb-12">
             <div>
-              <h2 className="text-3xl font-bold mb-2 text-foreground">Featured Listings</h2>
-              <p className="text-muted-foreground">Hand-picked highlights from the directory.</p>
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-500/10 text-yellow-600 rounded-full text-xs font-bold mb-3 border border-yellow-500/20">
+                <Star className="w-3 h-3 fill-current" /> PREMIER SELECTION
+              </div>
+              <h2 className="text-3xl font-bold mb-2 text-foreground">Featured Premium Listings</h2>
+              <p className="text-muted-foreground">Top-rated businesses and verified partners.</p>
             </div>
-            <Link href="/search" className="text-primary font-medium hover:text-primary/80 flex items-center gap-2">
+            <Link href="/search?sort=premium" className="text-primary font-medium hover:text-primary/80 flex items-center gap-2">
               View All <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Mock Data for Theme Integration Preview */}
             <ThemeListingCard
+              variant="premium"
               listing={{
                 id: 1,
                 title: "Ocean View Villa",
@@ -136,6 +140,7 @@ export default function LandingPage() {
               }}
             />
             <ThemeListingCard
+              variant="premium"
               listing={{
                 id: 2,
                 title: "Elite Car Rentals",
@@ -154,6 +159,7 @@ export default function LandingPage() {
               }}
             />
             <ThemeListingCard
+              variant="premium"
               listing={{
                 id: 3,
                 title: "Senior Developer",
@@ -170,6 +176,85 @@ export default function LandingPage() {
                 ]
               }}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Latest / Basic Listings Section */}
+      <section className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-2xl font-bold mb-8">Latest Additions</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Basic Listing 1 */}
+            <ThemeListingCard
+              variant="basic"
+              listing={{
+                id: 101,
+                title: "Island Coffee Roasters",
+                image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2940&auto=format&fit=crop",
+                category: { name: "Business", icon: <Briefcase size={14} />, color: "#3b82f6" },
+                location: "Kingston, Jamaica",
+                rating: 4.5,
+                verified: false,
+                status: "Open",
+                infoFields: [
+                  { icon: <MapPin size={14} />, label: "Downtown" }
+                ]
+              }}
+            />
+            {/* Basic Listing 2 */}
+            <ThemeListingCard
+              variant="basic"
+              listing={{
+                id: 102,
+                title: "Sunset Boat Tours",
+                image: "https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?q=80&w=2940&auto=format&fit=crop",
+                category: { name: "Services", icon: <Wrench size={14} />, color: "#a855f7" },
+                location: "Castries, St. Lucia",
+                rating: 4.7,
+                verified: true,
+                status: "Open",
+                infoFields: [
+                  { icon: <Phone size={14} />, label: "Book Now" }
+                ]
+              }}
+            />
+            {/* Basic Listing 3 */}
+            <ThemeListingCard
+              variant="basic"
+              listing={{
+                id: 103,
+                title: "Medical Specialist Center",
+                image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2940&auto=format&fit=crop",
+                category: { name: "Medical", icon: <HeartPulse size={14} />, color: "#ef4444" },
+                location: "Georgetown, Guyana",
+                verified: true,
+                status: "Open",
+                infoFields: [
+                  { icon: <Phone size={14} />, label: "Urgent Care" }
+                ]
+              }}
+            />
+            {/* Basic Listing 4 */}
+            <ThemeListingCard
+              variant="basic"
+              listing={{
+                id: 104,
+                title: "Tech Solutions Ltd",
+                image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2940&auto=format&fit=crop",
+                category: { name: "Business", icon: <Briefcase size={14} />, color: "#3b82f6" },
+                location: "Port of Spain, Trinidad",
+                verified: false,
+                status: "Open",
+              }}
+            />
+          </div>
+
+          <div className="mt-12 text-center">
+            <Link href="/search" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border bg-card hover:bg-secondary transition-colors font-medium">
+              Load More Listings <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

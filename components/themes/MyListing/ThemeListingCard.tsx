@@ -24,7 +24,7 @@ interface ListingProps {
 import { useTheme } from 'next-themes';
 import { useState, useEffect } from 'react';
 
-export const ThemeListingCard: React.FC<{ listing: ListingProps; theme?: 'light' | 'dark'; layout?: 'grid' | 'list' }> = ({ listing, theme = 'dark', layout = 'grid' }) => {
+export const ThemeListingCard: React.FC<{ listing: ListingProps; theme?: 'light' | 'dark'; layout?: 'grid' | 'list'; variant?: 'premium' | 'basic' }> = ({ listing, theme = 'dark', layout = 'grid', variant = 'basic' }) => {
     const { theme: globalTheme, resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
@@ -34,12 +34,23 @@ export const ThemeListingCard: React.FC<{ listing: ListingProps; theme?: 'light'
 
     const activeTheme = mounted ? (resolvedTheme || globalTheme) : theme;
     const isDark = activeTheme === 'dark';
-    const t = themes[isDark ? 'dark' : 'light'];
     const isList = layout === 'list';
+    const isPremium = variant === 'premium';
 
+    // Premium Logic: Golden border/glow, slightly larger
+    const wrapperClasses = isPremium
+        ? "group relative rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 bg-card border-2 border-yellow-500/50 shadow-xl shadow-yellow-500/10 hover:shadow-yellow-500/20 h-full"
+        : "group relative rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 bg-card border border-border hover:shadow-xl hover:border-primary/50 h-full";
 
     const cardContent = (
-        <div className="group relative rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 bg-card border border-border hover:shadow-2xl h-full hover:border-primary/50">
+        <div className={wrapperClasses}>
+
+            {/* Premium Badge */}
+            {isPremium && (
+                <div className="absolute top-0 right-0 z-20 bg-yellow-500 text-black text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">
+                    Premium
+                </div>
+            )}
 
             {/* Header / Cover Image */}
             <div className="h-48 relative overflow-hidden bg-muted">
