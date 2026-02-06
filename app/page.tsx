@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ChevronRight, ArrowRight, CheckCircle2, Star, Zap, LayoutDashboard, ShieldCheck, PlayCircle, Briefcase, Car, Phone, Home, MapPin, CheckCircle, Globe, BarChart3, Wrench, HeartPulse } from 'lucide-react';
+import { ChevronRight, ArrowRight, CheckCircle2, Star, Zap, LayoutDashboard, ShieldCheck, PlayCircle, Briefcase, Car, Phone, Home, MapPin, CheckCircle, Globe, BarChart3, Wrench, HeartPulse, Search } from 'lucide-react';
 import { CBConnectLogo } from '@/components/CBConnectLogo';
 import { AuthButton } from '@/components/auth/AuthButton';
 import { ThemeHeroSearch } from '@/components/themes/MyListing/ThemeHeroSearch';
@@ -41,6 +41,75 @@ export default function LandingPage() {
 
           <div className="animate-fade-in-up delay-300">
             <ThemeHeroSearch />
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Strip */}
+      <section className="border-y border-border bg-card/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-border">
+            <div className="flex flex-col items-center justify-center p-4">
+              <span className="text-3xl font-bold text-foreground">15+</span>
+              <span className="text-sm text-muted-foreground uppercase tracking-wider mt-1">Islands</span>
+            </div>
+            <div className="flex flex-col items-center justify-center p-4">
+              <span className="text-3xl font-bold text-foreground">10,000+</span>
+              <span className="text-sm text-muted-foreground uppercase tracking-wider mt-1">Businesses</span>
+            </div>
+            <div className="flex flex-col items-center justify-center p-4">
+              <span className="text-3xl font-bold text-foreground">Growing</span>
+              <span className="text-sm text-muted-foreground uppercase tracking-wider mt-1">Daily</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Who It's For (3 Paths) */}
+      <section className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Built for Everyone in the Caribbean Economy</h2>
+            <p className="text-muted-foreground">Whether you're looking, listing, or hiring, we've got you covered.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Customer Path */}
+            <div className="group p-8 rounded-3xl border border-border bg-card hover:border-primary/50 transition-all hover:shadow-lg">
+              <div className="w-12 h-12 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center mb-6">
+                <Search className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Customers</h3>
+              <p className="text-muted-foreground mb-6">Find reliable local services, verified businesses, and top-rated professionals fast.</p>
+              <Link href="/search" className="flex items-center text-sm font-bold text-primary hover:gap-2 transition-all">
+                Browse Businesses <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </div>
+
+            {/* Business Path */}
+            <div className="group p-8 rounded-3xl border border-border bg-card hover:border-primary/50 transition-all hover:shadow-lg relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-3 bg-primary text-primary-foreground text-xs font-bold rounded-bl-xl">Most Popular</div>
+              <div className="w-12 h-12 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center mb-6">
+                <LayoutDashboard className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Businesses</h3>
+              <p className="text-muted-foreground mb-6">Get discovered, receive leads, and access tools that increase your revenue.</p>
+              <Link href="/add-listing" className="flex items-center text-sm font-bold text-primary hover:gap-2 transition-all">
+                List Your Business <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </div>
+
+            {/* Employer Path */}
+            <div className="group p-8 rounded-3xl border border-border bg-card hover:border-primary/50 transition-all hover:shadow-lg">
+              <div className="w-12 h-12 bg-pink-500/10 text-pink-500 rounded-xl flex items-center justify-center mb-6">
+                <Briefcase className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Employers</h3>
+              <p className="text-muted-foreground mb-6">Post jobs, find local talent, and build your dream team with ease.</p>
+              <Link href="/add-listing" className="flex items-center text-sm font-bold text-primary hover:gap-2 transition-all">
+                Post a Job <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
