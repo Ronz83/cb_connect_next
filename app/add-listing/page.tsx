@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { ThemeHeader } from '@/components/themes/MyListing/ThemeHeader';
 import { Briefcase, Car, Home, Stethoscope, Wrench, Globe, CheckCircle2, Search, ArrowRight, Plus } from 'lucide-react';
