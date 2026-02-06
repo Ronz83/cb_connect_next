@@ -25,6 +25,9 @@ export default function JobsMarketingPage() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <Link href="/jobs/browse" className="w-full sm:w-auto px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-foreground font-bold rounded-xl hover:bg-white/20 transition-all flex items-center justify-center gap-2">
+                            <Search size={20} /> Browse Jobs
+                        </Link>
                         <Link href="/login/business" className="w-full sm:w-auto px-8 py-4 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/25">
                             Post a Job
                         </Link>

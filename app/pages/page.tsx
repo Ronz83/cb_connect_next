@@ -41,7 +41,7 @@ export default function MarketingLandingPage() {
             <div className="py-24 bg-muted/30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <Link href="/marketing/registry" className="group p-8 rounded-3xl bg-card border border-border shadow-sm hover:shadow-md hover:border-primary/50 transition-all">
+                        <Link href="/registry" className="group p-8 rounded-3xl bg-card border border-border shadow-sm hover:shadow-md hover:border-primary/50 transition-all">
                             <Globe className="w-12 h-12 text-primary mb-6 group-hover:scale-110 transition-transform" />
                             <h3 className="text-2xl font-bold mb-3 flex items-center gap-2">
                                 Registry & Directory <ArrowRight size={18} className="opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -49,7 +49,7 @@ export default function MarketingLandingPage() {
                             <p className="text-muted-foreground">Access a verified database of businesses across 15+ Caribbean nations. Get listed and be seen.</p>
                         </Link>
 
-                        <Link href="/marketing/jobs" className="group p-8 rounded-3xl bg-card border border-border shadow-sm hover:shadow-md hover:border-accent/50 transition-all">
+                        <Link href="/jobs" className="group p-8 rounded-3xl bg-card border border-border shadow-sm hover:shadow-md hover:border-accent/50 transition-all">
                             <ShoppingBag className="w-12 h-12 text-accent mb-6 group-hover:scale-110 transition-transform" />
                             <h3 className="text-2xl font-bold mb-3 flex items-center gap-2">
                                 Jobs & Talent <ArrowRight size={18} className="opacity-0 group-hover:opacity-100 transition-opacity" />
