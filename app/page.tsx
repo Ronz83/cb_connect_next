@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ChevronRight, ArrowRight, CheckCircle2, Star, Zap, LayoutDashboard, ShieldCheck, PlayCircle, Briefcase, Car, Phone, Home, MapPin, CheckCircle, Globe, BarChart3 } from 'lucide-react';
+import { ChevronRight, ArrowRight, CheckCircle2, Star, Zap, LayoutDashboard, ShieldCheck, PlayCircle, Briefcase, Car, Phone, Home, MapPin, CheckCircle, Globe, BarChart3, Wrench, HeartPulse } from 'lucide-react';
 import { CBConnectLogo } from '@/components/CBConnectLogo';
 import { AuthButton } from '@/components/auth/AuthButton';
 import { ThemeHeroSearch } from '@/components/themes/MyListing/ThemeHeroSearch';
@@ -41,6 +41,62 @@ export default function LandingPage() {
 
           <div className="animate-fade-in-up delay-300">
             <ThemeHeroSearch />
+          </div>
+        </div>
+      </section>
+
+      {/* Browse by Category Section */}
+      <section className="py-20 bg-background border-b border-border">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Browse by Category</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">Explore our diverse marketplace covering every aspect of Caribbean living and business.</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {[
+              { label: 'Business', icon: <Briefcase size={24} />, color: 'bg-blue-500/10 text-blue-500 hover:bg-blue-500 hover:text-white' },
+              { label: 'Automotive', icon: <Car size={24} />, color: 'bg-orange-500/10 text-orange-500 hover:bg-orange-500 hover:text-white' },
+              { label: 'Real Estate', icon: <Home size={24} />, color: 'bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white' },
+              { label: 'Medical', icon: <HeartPulse size={24} />, color: 'bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white' },
+              { label: 'Services', icon: <Wrench size={24} />, color: 'bg-purple-500/10 text-purple-500 hover:bg-purple-500 hover:text-white' },
+              { label: 'Jobs', icon: <Briefcase size={24} />, color: 'bg-pink-500/10 text-pink-500 hover:bg-pink-500 hover:text-white' },
+            ].map((cat) => (
+              <Link
+                key={cat.label}
+                href={`/search?category=${cat.label.toLowerCase().replace(' ', '_')}`}
+                className={`flex flex-col items-center justify-center p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 ${cat.color}`}
+              >
+                <div className="mb-3">{cat.icon}</div>
+                <span className="font-semibold text-sm">{cat.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA - List Your Business */}
+      <section className="py-24 relative overflow-hidden bg-primary text-primary-foreground">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">List Your Business in Minutes</h2>
+            <p className="text-xl opacity-90 mb-8">Join the fastest growing Caribbean directory. Reach thousands of customers, showcase your services, and grow your brand.</p>
+            <ul className="space-y-3 mb-8">
+              <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 fill-white/20" /> Create a professional profile</li>
+              <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 fill-white/20" /> Get discovered by local customers</li>
+              <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 fill-white/20" /> Manage leads and analytics</li>
+            </ul>
+            <Link href="/add-listing" className="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg">
+              Get Listed Now <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
+          {/* Visual or Graphic */}
+          <div className="w-full md:w-96 aspect-square bg-white/10 rounded-3xl backdrop-blur-sm border border-white/20 p-8 flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-6xl font-bold mb-2">15k+</div>
+              <div className="opacity-80">Active Listings</div>
+            </div>
           </div>
         </div>
       </section>

@@ -96,10 +96,10 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
                             <AuthButton theme={activeTheme} />
                         </div>
 
-                        <button className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-sm shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5">
+                        <Link href="/add-listing" className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-sm shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5">
                             <Plus size={16} />
                             <span>Add Listing</span>
-                        </button>
+                        </Link>
 
                         {/* Mobile Menu Toggle */}
                         <button
