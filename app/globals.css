@@ -34,8 +34,8 @@
   --card-foreground: #002D56;
   --popover: #ffffff;
   --popover-foreground: #002D56;
-  --primary: #009CA6;
-  /* Caricom Cyan */
+  --primary: #0077B6;
+  /* Richer Caribbean Blue (was #009CA6) */
   --primary-foreground: #ffffff;
   --secondary: #E3F6F8;
   /* Light Cyan Tint */
@@ -51,39 +51,50 @@
   --border: #CFE8EB;
   /* Cyan Border */
   --input: #CFE8EB;
-  --ring: #009CA6;
+  --ring: #0077B6;
   --radius: 0.75rem;
 }
 
 .dark {
   /* Dark Mode - Deep Caribbean Night */
-  --background: #00121F;
-  /* Very Deep Navy */
-  --foreground: #E3F6F8;
-  /* Light Cyan Text */
-  --card: #001B2E;
-  /* Slightly Lighter Navy */
-  --card-foreground: #E3F6F8;
-  --popover: #001B2E;
-  --popover-foreground: #E3F6F8;
+  --background: #023E8A;
+  /* Deep Blue Background */
+  --foreground: #CAF0F8;
+  --card: #002D56;
+  /* Navy Card */
+  --card-foreground: #CAF0F8;
+  --popover: #002D56;
+  --popover-foreground: #CAF0F8;
   --primary: #00B4D8;
-  /* Bright Cyan */
+  /* Bright Cyan Highlights */
   --primary-foreground: #00121F;
-  --secondary: #002D4D;
-  /* Secondary Navy */
-  --secondary-foreground: #E3F6F8;
-  --muted: #002D4D;
-  --muted-foreground: #8AB4CC;
-  /* Muted Cyan Gray */
+  --secondary: #0077B6;
+  /* Secondary Blue */
+  --secondary-foreground: #ffffff;
+  --muted: #03045E;
+  --muted-foreground: #90E0EF;
   --accent: #F9A400;
   /* Gold Pop */
   --accent-foreground: #00121F;
   --destructive: #7f1d1d;
   --destructive-foreground: #fafafa;
-  --border: #003355;
-  /* Subtle Navy Border */
-  --input: #003355;
+  --border: #0077B6;
+  --input: #0077B6;
   --ring: #F9A400;
+}
+
+/* Texture Utilities */
+.bg-texture-dots {
+  background-image: radial-gradient(#0077B6 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.05;
+}
+
+.bg-texture-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(0, 119, 182, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 119, 182, 0.05) 1px, transparent 1px);
 }
 
 body {

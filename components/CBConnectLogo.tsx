@@ -20,7 +20,7 @@ export const CBConnectLogo: React.FC<CBConnectLogoProps> = ({ size = 'default', 
             alt="CB Connect Logo"
             width={s.width}
             height={s.height}
-            className="object-contain"
+            className="object-contain rounded-2xl"
             priority
         />
     );
