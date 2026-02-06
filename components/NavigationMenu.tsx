@@ -12,8 +12,8 @@ interface NavigationMenuProps {
     theme: 'dark' | 'light';
 }
 
-export const NavigationMenu: React.FC<NavigationMenuProps> = ({ isOpen, onClose, onNavigateHome, theme }) => {
-    const t = themes[theme];
+export const NavigationMenu: React.FC<NavigationMenuProps> = ({ isOpen, onClose, onNavigateHome, theme = 'dark' }) => {
+    const t = themes[theme] || themes['dark'];
 
     // Close menu on Escape key
     useEffect(() => {
