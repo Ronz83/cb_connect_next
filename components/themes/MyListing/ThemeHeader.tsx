@@ -44,7 +44,7 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
 
     return (
         <>
-            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isSolid ? 'bg-background/80 backdrop-blur-xl border-b border-white/10 shadow-sm' : 'bg-transparent'}`}>
+            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background/80 backdrop-blur-xl border-b border-white/10 shadow-sm`}>
                 <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
 
                     {/* LEFT: Logo & Location (Desktop) */}
@@ -52,7 +52,7 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
                         {/* Point to main directory home */}
                         <a href="https://dir.caricombusiness.com/" className="flex items-center gap-2">
                             {/* Replaced CB with Image Logo */}
-                            <div className={`font-bold text-xl tracking-tight flex items-center gap-2 ${isSolid ? 'text-foreground' : (activeTheme === 'light' ? 'text-white' : 'text-foreground')}`}>
+                            <div className={`font-bold text-xl tracking-tight flex items-center gap-2 text-foreground`}>
                                 <Image
                                     src="/assets/cb-logo.png"
                                     alt="Caricom Business Logo"
@@ -61,7 +61,7 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
                                     className="w-12 h-12 object-contain rounded-xl"
                                     priority
                                 />
-                                <span className={`hidden md:inline ${!isSolid && activeTheme === 'light' ? 'text-white drop-shadow-md' : ''}`}>Directory</span>
+                                <span className="hidden md:inline">Directory</span>
                             </div>
                         </a>
 
@@ -87,7 +87,7 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
                     <div className="flex items-center gap-3">
                         <ThemeToggle />
 
-                        <Link href="/pricing" className={`hidden md:flex items-center gap-2 px-4 py-2.5 font-bold text-sm transition-all ${isSolid ? 'text-foreground hover:text-primary' : 'text-foreground hover:text-primary'}`}>
+                        <Link href="/pricing" className="hidden md:flex items-center gap-2 px-4 py-2.5 font-bold text-sm transition-all text-foreground hover:text-primary">
                             Pricing
                         </Link>
 
