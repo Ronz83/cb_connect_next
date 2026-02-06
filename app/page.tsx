@@ -48,7 +48,7 @@ export default function LandingPage() {
             <ThemeHeroSearch />
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4 animate-fade-in-up delay-500">
+          <div className="flex flex-wrap justify-center gap-4 animate-fade-in-up delay-500 pb-16 md:pb-24">
             <Link href="/add-listing" className="px-8 py-3 rounded-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold transition-all shadow-lg hover:shadow-yellow-500/20 hover:-translate-y-1">
               List Your Business Free
             </Link>
@@ -263,6 +263,80 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Premium Listings Section (New) */}
+      <section className="py-24 bg-background border-y border-border">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <h2 className="text-3xl font-bold mb-2 text-foreground">Premium Listings</h2>
+              <p className="text-muted-foreground">Recommended businesses in your area.</p>
+            </div>
+            <Link href="/search?sort=premium" className="text-primary font-medium hover:text-primary/80 flex items-center gap-2">
+              View All <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Reusing Premium Cards with different data mock */}
+            <ThemeListingCard
+              variant="premium"
+              listing={{
+                id: 4,
+                title: "Island Adventures",
+                image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=2940&auto=format&fit=crop",
+                logo: "https://placehold.co/100x100/teal/white?text=IA",
+                category: { name: "Services", icon: <Wrench size={14} />, color: "#14b8a6" },
+                location: "St. John's, Antigua",
+                rating: 4.9,
+                reviewCount: 42,
+                verified: true,
+                status: "Open",
+                price: "From $50",
+                infoFields: [
+                  { icon: <MapPin size={14} />, label: "Guided Tours" }
+                ]
+              }}
+            />
+            <ThemeListingCard
+              variant="premium"
+              listing={{
+                id: 5,
+                title: "Caribbean Tech Hub",
+                image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2940&auto=format&fit=crop",
+                logo: "https://placehold.co/100x100/indigo/white?text=TH",
+                category: { name: "Business", icon: <Briefcase size={14} />, color: "#6366f1" },
+                location: "Kingston, Jamaica",
+                rating: 5.0,
+                reviewCount: 12,
+                verified: true,
+                status: "Open",
+                infoFields: [
+                  { icon: <Briefcase size={14} />, label: "Coworking" }
+                ]
+              }}
+            />
+            <ThemeListingCard
+              variant="premium"
+              listing={{
+                id: 6,
+                title: "Azure Realty Group",
+                image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2873&auto=format&fit=crop",
+                logo: "https://placehold.co/100x100/blue/white?text=AR",
+                category: { name: "Real Estate", icon: <Home size={14} />, color: "#3b82f6" },
+                location: "Nassau, Bahamas",
+                type: "listing",
+                verified: true,
+                status: "Open",
+                price: "Luxury",
+                infoFields: [
+                  { icon: <Home size={14} />, label: "Commercial" }
+                ]
+              }}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Latest / Basic Listings Section */}
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-6">
@@ -386,51 +460,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* SaaS / Growth Tools */}
-      <section className="py-24 relative overflow-hidden bg-background">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-primary font-bold tracking-wider text-xs uppercase mb-2 block">Monetization & Growth</span>
-            <h2 className="text-4xl font-bold mb-4">Tools That Help Your Business Grow 24/7</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Automate your operations with our integrated suite of tools.</p>
-          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: 'CRM & Pipeline', desc: 'Track every lead', icon: <BarChart3 className="w-6 h-6" />, color: 'bg-blue-500' },
-              { title: 'Automation', desc: 'Follow up automatically', icon: <Zap className="w-6 h-6" />, color: 'bg-yellow-500' },
-              { title: 'Website & Funnels', desc: 'Convert visitors', icon: <LayoutDashboard className="w-6 h-6" />, color: 'bg-purple-500' },
-              { title: 'Booking System', desc: 'Schedule instantly', icon: <PlayCircle className="w-6 h-6" />, color: 'bg-green-500' },
-            ].map((tool, i) => (
-              <div key={i} className="p-6 rounded-2xl border border-border bg-card hover:translate-y-[-4px] transition-transform duration-300">
-                <div className={`w-12 h-12 rounded-xl ${tool.color} bg-opacity-10 flex items-center justify-center mb-4 text-${tool.color.split('-')[1]}-500`}>
-                  {tool.icon}
-                </div>
-                <h3 className="font-bold text-lg mb-2">{tool.title}</h3>
-                <p className="text-sm text-muted-foreground">{tool.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Dashboard Preview Mockup */}
-          <div className="mt-16 rounded-3xl border border-border bg-card shadow-2xl overflow-hidden relative group">
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
-            <div className="p-8 md:p-12 text-center relative z-20">
-              <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-background/80 backdrop-blur border border-border shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                <span className="text-sm font-medium">Analytics Dashboard Live</span>
-              </div>
-              {/* Placeholder for complex dashboard image - using CSS/Divs for structure if no image */}
-              <div className="w-full aspect-[16/9] bg-secondary/50 rounded-xl border border-dashed border-border flex items-center justify-center text-muted-foreground">
-                <div className="text-center">
-                  <BarChart3 className="w-16 h-16 mx-auto mb-4 opacity-20" />
-                  <p>Interactive Revenue Dashboard Mockup</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Success Stories */}
       <section className="py-20 bg-secondary/10 border-y border-border">

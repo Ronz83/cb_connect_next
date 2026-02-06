@@ -1,9 +1,7 @@
-'use client';
-
 import React, { useState } from 'react';
 import { ThemeHeader } from '@/components/themes/MyListing/ThemeHeader';
 import { Briefcase, Car, Home, Stethoscope, Wrench, Globe, CheckCircle2, Search, ArrowRight, Plus } from 'lucide-react';
-import { CBConnectLogo } from '@/components/CBConnectLogo';
+import { PageHero } from '@/components/PageHero';
 
 // Define the verticals
 const VERTICALS = [
@@ -33,19 +31,21 @@ export default function AddListingPage() {
 
     return (
         <div className="min-h-screen bg-background text-foreground font-sans">
-            <ThemeHeader transparent={false} />
+            <ThemeHeader transparent={true} />
 
-            <main className="pt-32 pb-20 px-6">
+            <PageHero
+                title="What would you like to list?"
+                subtitle="Select a category to begin your journey with CB Connect."
+                backgroundImage="https://images.unsplash.com/photo-1554774853-719586f8c277?q=80&w=2800&auto=format&fit=crop"
+            >
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white font-medium text-sm">
+                    <Plus className="w-4 h-4" /> Start Your Application
+                </div>
+            </PageHero>
+
+            <main className="pb-20 px-6 -mt-20 relative z-10">
                 <div className="max-w-4xl mx-auto">
-
-                    {/* Header */}
-                    <div className="text-center mb-16 animate-fade-in-up">
-                        <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-primary/10 text-primary font-medium text-sm">
-                            <Plus className="w-4 h-4" /> Start Your Application
-                        </div>
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">What would you like to list?</h1>
-                        <p className="text-xl text-muted-foreground">Select a category to begin your journey with CB Connect.</p>
-                    </div>
+                    {/* Header Removed (Moved to Hero) */}
 
                     {/* Vertical Grid */}
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12 animate-fade-in-up delay-100">
@@ -60,8 +60,8 @@ export default function AddListingPage() {
                                         setCustomSubCategory('');
                                     }}
                                     className={`relative group p-6 rounded-2xl border-2 text-left transition-all duration-300 hover:shadow-lg ${isSelected
-                                            ? 'border-primary bg-primary/5 ring-1 ring-primary'
-                                            : 'border-border bg-card hover:border-primary/50'
+                                        ? 'border-primary bg-primary/5 ring-1 ring-primary'
+                                        : 'border-border bg-card hover:border-primary/50'
                                         }`}
                                 >
                                     <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 text-white shadow-md transition-transform group-hover:scale-110 ${v.color}`}>
@@ -99,8 +99,8 @@ export default function AddListingPage() {
                                                 key={sub}
                                                 onClick={() => setSubCategory(sub)}
                                                 className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all ${subCategory === sub
-                                                        ? 'bg-foreground text-background border-foreground'
-                                                        : 'bg-background border-border hover:border-foreground/50'
+                                                    ? 'bg-foreground text-background border-foreground'
+                                                    : 'bg-background border-border hover:border-foreground/50'
                                                     }`}
                                             >
                                                 {sub}
@@ -110,8 +110,8 @@ export default function AddListingPage() {
                                         <button
                                             onClick={() => setSubCategory('custom')}
                                             className={`px-4 py-3 rounded-xl border-2 border-dashed text-sm font-medium transition-all flex items-center justify-center gap-2 ${subCategory === 'custom'
-                                                    ? 'border-primary text-primary bg-primary/10'
-                                                    : 'border-muted-foreground/30 text-muted-foreground hover:border-primary hover:text-primary'
+                                                ? 'border-primary text-primary bg-primary/10'
+                                                : 'border-muted-foreground/30 text-muted-foreground hover:border-primary hover:text-primary'
                                                 }`}
                                         >
                                             <Plus className="w-4 h-4" /> Other
