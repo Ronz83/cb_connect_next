@@ -52,7 +52,7 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
                         {/* Point to main directory home */}
                         <a href="https://dir.caricombusiness.com/" className="flex items-center gap-2">
                             {/* Replaced CB with Image Logo */}
-                            <div className={`font-bold text-xl tracking-tight flex items-center gap-2 ${isSolid ? 'text-foreground' : 'text-white'}`}>
+                            <div className={`font-bold text-xl tracking-tight flex items-center gap-2 ${isSolid || activeTheme === 'light' ? 'text-foreground' : 'text-white'}`}>
                                 <Image
                                     src="/assets/cb-logo.png"
                                     alt="Caricom Business Logo"
