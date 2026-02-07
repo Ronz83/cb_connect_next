@@ -79,6 +79,19 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Trust Strip - Subtle Gradient */}
+      <div className="py-12 bg-gradient-to-b from-background to-secondary/10 border-b border-white/5 backdrop-blur-sm relative z-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            {/* ... logos remain ... */}
+            <div className="flex items-center justify-center gap-2"><Briefcase className="w-6 h-6" /><span className="font-bold text-xl">Government</span></div>
+            <div className="flex items-center justify-center gap-2"><Globe className="w-6 h-6" /><span className="font-bold text-xl">Tourism</span></div>
+            <div className="flex items-center justify-center gap-2"><ShieldCheck className="w-6 h-6" /><span className="font-bold text-xl">Finance</span></div>
+            <div className="flex items-center justify-center gap-2"><Zap className="w-6 h-6" /><span className="font-bold text-xl">Energy</span></div>
+          </div>
+        </div>
+      </div>
+
       {/* Who It's For (3 Paths) */}
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-6">
@@ -129,7 +142,7 @@ export default function LandingPage() {
       </section>
 
       {/* Browse by Category Section */}
-      <section className="py-20 bg-background border-b border-border">
+      <section className="py-20 bg-gradient-to-b from-background to-secondary/5 border-b border-border">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Browse by Category</h2>
@@ -137,6 +150,7 @@ export default function LandingPage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {/* ... mapped categories ... */}
             {[
               { label: 'Business', icon: <Briefcase size={24} />, color: 'bg-blue-500/10 text-blue-500 hover:bg-blue-500 hover:text-white' },
               { label: 'Automotive', icon: <Car size={24} />, color: 'bg-orange-500/10 text-orange-500 hover:bg-orange-500 hover:text-white' },
@@ -159,7 +173,8 @@ export default function LandingPage() {
       </section>
 
       {/* CTA - List Your Business */}
-      <section className="py-24 relative overflow-hidden bg-primary text-primary-foreground">
+      <section className="py-24 relative overflow-hidden bg-gradient-to-r from-primary to-primary/90 text-primary-foreground">
+        {/* ... content ... */}
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
           <div className="max-w-2xl">
@@ -185,7 +200,8 @@ export default function LandingPage() {
       </section>
 
       {/* Premium Directory Section */}
-      <section className="py-24 bg-gradient-to-b from-secondary/20 to-secondary/40 border-y border-yellow-500/10 relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-b from-secondary/20 via-secondary/10 to-background border-y border-yellow-500/10 relative overflow-hidden">
+        {/* ... content ... */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex items-center justify-between mb-12">
@@ -200,7 +216,7 @@ export default function LandingPage() {
               View All <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-
+          {/* ... cards ... */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <ThemeListingCard
               variant="premium"
@@ -265,6 +281,7 @@ export default function LandingPage() {
 
       {/* Premium Listings Section (New) */}
       <section className="py-24 bg-background border-y border-border">
+        {/* ... content ... */}
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between mb-12">
             <div>
@@ -338,7 +355,8 @@ export default function LandingPage() {
       </section>
 
       {/* Latest / Basic Listings Section */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-gradient-to-b from-background to-secondary/5">
+        {/* ... content ... */}
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-2xl font-bold mb-8">Latest Additions</h2>
 
@@ -417,7 +435,8 @@ export default function LandingPage() {
       </section>
 
       {/* Job Board Preview */}
-      <section className="py-20 bg-secondary/20 border-y border-border">
+      <section className="py-20 bg-gradient-to-b from-secondary/20 to-secondary/10 border-y border-border">
+        {/* ... content ... */}
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
             <div>
@@ -463,7 +482,8 @@ export default function LandingPage() {
 
 
       {/* Success Stories */}
-      <section className="py-20 bg-secondary/10 border-y border-border">
+      <section className="py-20 bg-gradient-to-b from-white/5 to-background border-y border-border">
+        {/* ... content ... */}
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Success Stories</h2>
@@ -488,7 +508,8 @@ export default function LandingPage() {
       </section>
 
       {/* Island / Country Selector */}
-      <section className="py-24 bg-background overflow-hidden">
+      <section className="py-24 bg-gradient-to-b from-background via-secondary/5 to-background overflow-hidden">
+        {/* ... content ... */}
         <div className="max-w-7xl mx-auto px-6 text-center mb-12">
           <h2 className="text-3xl font-bold">Find Businesses in Your Island</h2>
           <p className="text-muted-foreground mt-2">Serving all Caricom Member States and Associate Members</p>

@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Menu, Plus, User, Search, MapPin } from 'lucide-react';
+import { Menu, Plus, User, Search, MapPin, ChevronDown, Check } from 'lucide-react';
+import { MOCK_COUNTRIES } from '@/data/mock-data';
 import { CBConnectLogo } from '@/components/CBConnectLogo';
 import { NavigationMenu } from '@/components/NavigationMenu';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -16,6 +17,7 @@ interface ThemeHeaderProps {
 
 import { useTheme } from 'next-themes';
 import { AuthButton } from '@/components/auth/AuthButton';
+import { useCountry } from '@/components/providers/CountryProvider';
 
 export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, theme: propTheme = 'dark', setTheme }) => {
     const { theme: globalTheme, resolvedTheme } = useTheme();
@@ -30,6 +32,7 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
 
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { selectedCountry, setSelectedCountry } = useCountry();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -64,6 +67,44 @@ export const ThemeHeader: React.FC<ThemeHeaderProps> = ({ transparent = false, t
                                 <span className="hidden md:inline">Directory</span>
                             </div>
                         </a>
+
+                        {/* Country Selector */}
+                        <div className="relative group hidden md:block">
+                            <button className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 transition-all">
+                                <img
+                                    src={selectedCountry?.flag || "https://flagcdn.com/w40/bb.png"}
+                                    alt="Flag"
+                                    className="w-5 h-3.5 object-cover rounded-sm shadow-sm"
+                                />
+                                <span className="text-sm font-medium text-foreground">{selectedCountry?.code || "BB"}</span>
+                                <ChevronDown size={14} className="text-muted-foreground" />
+                            </button>
+
+                            {/* Dropdown */}
+                            <div className="absolute top-full left-0 mt-2 w-64 bg-card border border-border rounded-xl shadow-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-left z-50 max-h-80 overflow-y-auto custom-scrollbar">
+                                <div className="p-2 sticky top-0 bg-card border-b border-border z-10">
+                                    <input
+                                        type="text"
+                                        placeholder="Search country..."
+                                        className="w-full px-3 py-1.5 text-sm bg-secondary rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
+                                        onClick={(e) => e.stopPropagation()}
+                                    />
+                                </div>
+                                <div className="p-1">
+                                    {MOCK_COUNTRIES.map((country) => (
+                                        <button
+                                            key={country.code}
+                                            onClick={() => setSelectedCountry(country)}
+                                            className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-secondary transition-colors text-left ${selectedCountry?.code === country.code ? 'bg-primary/10 text-primary' : 'text-foreground'}`}
+                                        >
+                                            <img src={country.flag} alt={country.name} className="w-6 h-4 object-cover rounded-[2px] shadow-sm" />
+                                            <span className="text-sm font-medium truncate">{country.name}</span>
+                                            {selectedCountry?.code === country.code && <Check size={14} className="ml-auto" />}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
 
                         {/* Desktop Search Bar (Optional, shows on scroll or specific pages) */}
                         <div className={`hidden md:flex items-center gap-3 px-4 py-2 rounded-full transition-all duration-300 ${isSolid ? 'bg-secondary' : 'opacity-0 pointer-events-none'}`}>

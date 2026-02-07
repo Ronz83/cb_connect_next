@@ -2,10 +2,26 @@ import React from 'react';
 import { Search, Mic, Menu, ArrowRight, Briefcase, Car, Home, Phone, MapPin, Globe, Star, LayoutGrid, List, Gauge, Fuel, Palette, Calendar, Bed, Bath, Move, DollarSign, Clock } from 'lucide-react';
 
 export const MOCK_COUNTRIES = [
-    { code: 'JM', name: 'Jamaica', flag: '🇯🇲' },
-    { code: 'BB', name: 'Barbados', flag: '🇧🇧' },
-    { code: 'TT', name: 'Trinidad & Tobago', flag: '🇹🇹' },
-    { code: 'BS', name: 'Bahamas', flag: '🇧🇸' },
+    { code: 'AG', name: 'Antigua & Barbuda', flag: 'https://flagcdn.com/w40/ag.png' },
+    { code: 'BS', name: 'Bahamas', flag: 'https://flagcdn.com/w40/bs.png' },
+    { code: 'BB', name: 'Barbados', flag: 'https://flagcdn.com/w40/bb.png' },
+    { code: 'BZ', name: 'Belize', flag: 'https://flagcdn.com/w40/bz.png' },
+    { code: 'DM', name: 'Dominica', flag: 'https://flagcdn.com/w40/dm.png' },
+    { code: 'GD', name: 'Grenada', flag: 'https://flagcdn.com/w40/gd.png' },
+    { code: 'GY', name: 'Guyana', flag: 'https://flagcdn.com/w40/gy.png' },
+    { code: 'HT', name: 'Haiti', flag: 'https://flagcdn.com/w40/ht.png' },
+    { code: 'JM', name: 'Jamaica', flag: 'https://flagcdn.com/w40/jm.png' },
+    { code: 'MS', name: 'Montserrat', flag: 'https://flagcdn.com/w40/ms.png' },
+    { code: 'KN', name: 'St. Kitts & Nevis', flag: 'https://flagcdn.com/w40/kn.png' },
+    { code: 'LC', name: 'St. Lucia', flag: 'https://flagcdn.com/w40/lc.png' },
+    { code: 'VC', name: 'St. Vincent', flag: 'https://flagcdn.com/w40/vc.png' },
+    { code: 'SR', name: 'Suriname', flag: 'https://flagcdn.com/w40/sr.png' },
+    { code: 'TT', name: 'Trinidad & Tobago', flag: 'https://flagcdn.com/w40/tt.png' },
+    { code: 'AI', name: 'Anguilla', flag: 'https://flagcdn.com/w40/ai.png' },
+    { code: 'BM', name: 'Bermuda', flag: 'https://flagcdn.com/w40/bm.png' },
+    { code: 'VG', name: 'British Virgin Is.', flag: 'https://flagcdn.com/w40/vg.png' },
+    { code: 'KY', name: 'Cayman Islands', flag: 'https://flagcdn.com/w40/ky.png' },
+    { code: 'TC', name: 'Turks & Caicos', flag: 'https://flagcdn.com/w40/tc.png' },
 ];
 
 export const MOCK_LISTINGS = [

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useCountry } from '@/components/providers/CountryProvider';
 import { FloatingParticles } from '@/components/FloatingParticles';
 import { CBConnectLogo } from '@/components/CBConnectLogo';
 import { ChatPopup } from '@/components/ChatPopup';
@@ -12,6 +13,7 @@ import { LayoutGrid, List } from 'lucide-react';
 import { ThemeHeader } from '@/components/themes/MyListing/ThemeHeader';
 import { ThemeHeroSearch } from '@/components/themes/MyListing/ThemeHeroSearch';
 import { ThemeListingCard } from '@/components/themes/MyListing/ThemeListingCard';
+import { FloatingFilterSidebar } from '@/components/search/FloatingFilterSidebar';
 import { MOCK_LISTINGS, MOCK_COUNTRIES } from '@/data/mock-data';
 import { PageHero } from '@/components/PageHero';
 
@@ -20,8 +22,8 @@ import { PageHero } from '@/components/PageHero';
 export default function SearchPage() {
     // const [theme, setTheme] = useState<ThemeType>('dark'); // REMOVED
     const { resolvedTheme } = useTheme();
+    const { selectedCountry, setSelectedCountry } = useCountry();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [selectedCountry, setSelectedCountry] = useState<any>(null);
     const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedIndustry, setSelectedIndustry] = useState('all');
@@ -36,11 +38,13 @@ export default function SearchPage() {
 
     // Filter businesses (Mock Logic)
     const filteredBusinesses = businesses.filter((b) => {
-        // Simplified filter for mock purposes
         const matchesSearch = b.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             b.location.toLowerCase().includes(searchQuery.toLowerCase());
-        // Map industry ID to mock category name for basic filtering if needed, otherwise ignore for now
-        return matchesSearch;
+
+        // Country Filter
+        const matchesCountry = selectedCountry ? b.location.includes(selectedCountry.name) : true;
+
+        return matchesSearch && matchesCountry;
     });
 
     const handleVoiceChat = (business: any) => {
@@ -72,7 +76,6 @@ export default function SearchPage() {
                 isOpen={isMenuOpen}
                 onClose={() => setIsMenuOpen(false)}
                 onNavigateHome={() => {
-                    setSelectedCountry(null);
                     setIsMenuOpen(false);
                     window.location.href = '/';
                 }}
@@ -107,39 +110,41 @@ export default function SearchPage() {
                     </PageHero>
                 </div>
 
-                {/* LISTINGS GRID */}
-                <div className="animate-in fade-in slide-in-from-bottom-8 duration-700">
-                    <div className="flex items-center justify-between mb-8">
-                        <div>
-                            <h2 className="text-2xl font-bold mb-1 text-foreground">Explore Directory</h2>
-                            <p className="text-sm text-muted-foreground">Showing {filteredBusinesses.length} results</p>
+                {/* LISTINGS SECTION */}
+                <div className="flex flex-col md:flex-row gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+
+                    {/* Sidebar */}
+                    <FloatingFilterSidebar
+                        viewMode={viewMode}
+                        setViewMode={setViewMode}
+                        categories={[
+                            { id: 'business', label: 'Business', count: 120 },
+                            { id: 'automotive', label: 'Automotive', count: 45 },
+                            { id: 'real_estate', label: 'Real Estate', count: 32 },
+                            { id: 'medical', label: 'Medical', count: 18 },
+                            { id: 'services', label: 'Services', count: 64 },
+                            { id: 'jobs', label: 'Jobs', count: 12 },
+                        ]}
+                    />
+
+                    {/* Results Grid */}
+                    <div className="flex-1">
+                        <div className="flex items-center justify-between mb-6">
+                            <div>
+                                <h2 className="text-2xl font-bold mb-1 text-foreground">Explore Directory</h2>
+                                <p className="text-sm text-muted-foreground">Showing {filteredBusinesses.length} results</p>
+                            </div>
                         </div>
 
-                        {/* VIEW TOGGLE */}
-                        <div className="flex items-center bg-secondary/50 rounded-lg p-1 border border-border">
-                            <button
-                                onClick={() => setViewMode('grid')}
-                                className={`p-2 rounded-md transition-all ${viewMode === 'grid' ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
-                            >
-                                <LayoutGrid size={18} />
-                            </button>
-                            <button
-                                onClick={() => setViewMode('list')}
-                                className={`p-2 rounded-md transition-all ${viewMode === 'list' ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
-                            >
-                                <List size={18} />
-                            </button>
+                        <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+                            {filteredBusinesses.map((listing) => (
+                                <ThemeListingCard
+                                    key={listing.id}
+                                    listing={listing}
+                                    layout={viewMode}
+                                />
+                            ))}
                         </div>
-                    </div>
-
-                    <div className={`grid gap-8 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
-                        {filteredBusinesses.map((listing) => (
-                            <ThemeListingCard
-                                key={listing.id}
-                                listing={listing}
-                                layout={viewMode}
-                            />
-                        ))}
                     </div>
                 </div>
             </main>

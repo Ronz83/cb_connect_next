@@ -1,31 +1,90 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
+import { useCountry } from '@/components/providers/CountryProvider';
 import Link from 'next/link';
 import { ThemeHeader } from '@/components/themes/MyListing/ThemeHeader';
 import { Briefcase, Search, Zap, CheckCircle, Users, ArrowRight } from 'lucide-react';
 import { PageHero } from '@/components/PageHero';
+import { ThemeHeroSearch } from '@/components/themes/MyListing/ThemeHeroSearch';
+import { FloatingFilterSidebar } from '@/components/search/FloatingFilterSidebar';
+import { ThemeListingCard } from '@/components/themes/MyListing/ThemeListingCard';
+import { MOCK_JOBS } from '@/data/mock-data';
 
 export default function JobsMarketingPage() {
+    const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+    const { selectedCountry } = useCountry();
+    const [filters, setFilters] = useState({
+        priceRange: { min: '', max: '' },
+        verifiedOnly: false,
+        selectedCategories: [] as string[],
+        sortBy: 'relevance'
+    });
+
+    const filteredJobs = MOCK_JOBS.filter(job => {
+        if (selectedCountry && !job.location.includes(selectedCountry.name)) return false;
+
+        // Category
+        if (filters.selectedCategories.length > 0) {
+            const jobType = job.title.toLowerCase(); // simplified matching
+            const matchesCategory = filters.selectedCategories.some(cat => jobType.includes(cat));
+            if (!matchesCategory) return false;
+        }
+
+        return true;
+    });
+
+    // Sort (Jobs usually don't have price, so maybe just standard sort or ignore price sort)
+    const sortedJobs = [...filteredJobs];
+    // If we had a salary field we could sort by that, but MOCK_JOBS might range string.
+    // For now, just pass through.
+
     return (
-        <div className="min-h-screen bg-background text-foreground font-sans">
+        <div className="min-h-screen bg-background text-foreground font-sans pb-20">
             <ThemeHeader transparent={true} />
 
             <PageHero
-                title="The Future of Work Is Right Here."
-                subtitle="Connect with top-tier Caribbean talent or find your dream role with our AI-powered matchmaking engine."
-                backgroundImage="/assets/bg/coolbackgrounds-fractalize-clear_lagoon.png"
+                title="Caribbean Jobs"
+                subtitle="Find your dream job or the perfect candidate today."
+                backgroundImage="/assets/bg/coolbackgrounds-gradient-clean.png"
             >
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <Link href="/jobs/browse" className="w-full sm:w-auto px-8 py-4 bg-white/20 backdrop-blur-md border border-white/20 text-white font-bold rounded-xl hover:bg-white/30 transition-all flex items-center justify-center gap-2">
-                        <Search size={20} /> Browse Jobs
-                    </Link>
-                    <Link href="/login/business" className="w-full sm:w-auto px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-gray-100 transition-all flex items-center justify-center gap-2 shadow-lg">
-                        Post a Job
-                    </Link>
-                    <Link href="/login/candidate" className="w-full sm:w-auto px-8 py-4 bg-black/40 border border-white/20 text-white font-bold rounded-xl hover:bg-black/60 transition-all flex items-center justify-center gap-2">
-                        Create Talent Profile
-                    </Link>
+                <div className="max-w-2xl mx-auto backdrop-blur-md bg-white/10 p-4 rounded-2xl border border-white/20 shadow-2xl">
+                    <ThemeHeroSearch />
                 </div>
             </PageHero>
+
+            <div className="pt-12 pb-12 px-4 max-w-7xl mx-auto">
+                <div className="flex flex-col md:flex-row gap-8 animate-in fade-in slide-in-from-bottom-8 delay-200">
+                    {/* Sidebar */}
+                    <FloatingFilterSidebar
+                        viewMode={viewMode}
+                        setViewMode={setViewMode}
+                        onFilterChange={setFilters}
+                        categories={[
+                            { id: 'tech', label: 'Technology', count: 45 },
+                            { id: 'hospitality', label: 'Hospitality', count: 120 },
+                            { id: 'finance', label: 'Finance', count: 23 },
+                            { id: 'construction', label: 'Construction', count: 18 },
+                        ]}
+                    />
+
+                    <div className="flex-1">
+                        <div className="flex items-center justify-between mb-6">
+                            <h2 className="text-2xl font-bold">Latest Opportunities</h2>
+                        </div>
+
+                        <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+                            {sortedJobs.map((job) => (
+                                <ThemeListingCard
+                                    key={job.id}
+                                    listing={job}
+                                    layout={viewMode}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             {/* Benefits Grid */}
             <div className="py-24 bg-muted/30">
